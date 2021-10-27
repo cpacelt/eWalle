@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D62EE17D2729EC8100D15748 /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62EE17C2729EC8100D15748 /* MenuCell.swift */; };
 		D63C0AAE2729AC3600834842 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D63C0AAD2729AC3600834842 /* AppDelegate.swift */; };
 		D63C0AB02729AC3600834842 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D63C0AAF2729AC3600834842 /* SceneDelegate.swift */; };
 		D63C0AB22729AC3600834842 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D63C0AB12729AC3600834842 /* LoginViewController.swift */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D62EE17C2729EC8100D15748 /* MenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
 		D63C0AAA2729AC3600834842 /* eWalle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = eWalle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D63C0AAD2729AC3600834842 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D63C0AAF2729AC3600834842 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -69,6 +71,7 @@
 				D63C0AAF2729AC3600834842 /* SceneDelegate.swift */,
 				D63C0AB12729AC3600834842 /* LoginViewController.swift */,
 				D63C0AC32729ADEC00834842 /* MenuViewController.swift */,
+				D62EE17C2729EC8100D15748 /* MenuCell.swift */,
 				D63C0AC12729AD9E00834842 /* HomeViewController.swift */,
 				D63C0AB32729AC3600834842 /* Main.storyboard */,
 				D63C0AB62729AC3A00834842 /* Assets.xcassets */,
@@ -162,6 +165,7 @@
 			files = (
 				D63C0AB22729AC3600834842 /* LoginViewController.swift in Sources */,
 				D63C0AC42729ADEC00834842 /* MenuViewController.swift in Sources */,
+				D62EE17D2729EC8100D15748 /* MenuCell.swift in Sources */,
 				D63C0AAE2729AC3600834842 /* AppDelegate.swift in Sources */,
 				D63C0AB02729AC3600834842 /* SceneDelegate.swift in Sources */,
 				D63C0AC22729AD9E00834842 /* HomeViewController.swift in Sources */,
