@@ -9,21 +9,29 @@
 /* Begin PBXBuildFile section */
 		D63C0AAE2729AC3600834842 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D63C0AAD2729AC3600834842 /* AppDelegate.swift */; };
 		D63C0AB02729AC3600834842 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D63C0AAF2729AC3600834842 /* SceneDelegate.swift */; };
-		D63C0AB22729AC3600834842 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D63C0AB12729AC3600834842 /* ViewController.swift */; };
+		D63C0AB22729AC3600834842 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D63C0AB12729AC3600834842 /* LoginViewController.swift */; };
 		D63C0AB52729AC3600834842 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D63C0AB32729AC3600834842 /* Main.storyboard */; };
 		D63C0AB72729AC3A00834842 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D63C0AB62729AC3A00834842 /* Assets.xcassets */; };
 		D63C0ABA2729AC3A00834842 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D63C0AB82729AC3A00834842 /* LaunchScreen.storyboard */; };
+		D63C0AC22729AD9E00834842 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D63C0AC12729AD9E00834842 /* HomeViewController.swift */; };
+		D63C0AC42729ADEC00834842 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D63C0AC32729ADEC00834842 /* MenuViewController.swift */; };
+		D63C0ACE2729C92900834842 /* Ubuntu-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D63C0ACC2729C8D800834842 /* Ubuntu-Bold.ttf */; };
+		D63C0ACF2729C92C00834842 /* Ubuntu-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D63C0ACD2729C8D800834842 /* Ubuntu-Medium.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		D63C0AAA2729AC3600834842 /* eWalle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = eWalle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D63C0AAD2729AC3600834842 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D63C0AAF2729AC3600834842 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		D63C0AB12729AC3600834842 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		D63C0AB12729AC3600834842 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		D63C0AB42729AC3600834842 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D63C0AB62729AC3A00834842 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D63C0AB92729AC3A00834842 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D63C0ABB2729AC3A00834842 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D63C0AC12729AD9E00834842 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		D63C0AC32729ADEC00834842 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		D63C0ACC2729C8D800834842 /* Ubuntu-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Bold.ttf"; sourceTree = "<group>"; };
+		D63C0ACD2729C8D800834842 /* Ubuntu-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Medium.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +64,27 @@
 		D63C0AAC2729AC3600834842 /* eWalle */ = {
 			isa = PBXGroup;
 			children = (
+				D63C0ACB2729C88700834842 /* Fonts */,
 				D63C0AAD2729AC3600834842 /* AppDelegate.swift */,
 				D63C0AAF2729AC3600834842 /* SceneDelegate.swift */,
-				D63C0AB12729AC3600834842 /* ViewController.swift */,
+				D63C0AB12729AC3600834842 /* LoginViewController.swift */,
+				D63C0AC32729ADEC00834842 /* MenuViewController.swift */,
+				D63C0AC12729AD9E00834842 /* HomeViewController.swift */,
 				D63C0AB32729AC3600834842 /* Main.storyboard */,
 				D63C0AB62729AC3A00834842 /* Assets.xcassets */,
 				D63C0AB82729AC3A00834842 /* LaunchScreen.storyboard */,
 				D63C0ABB2729AC3A00834842 /* Info.plist */,
 			);
 			path = eWalle;
+			sourceTree = "<group>";
+		};
+		D63C0ACB2729C88700834842 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				D63C0ACC2729C8D800834842 /* Ubuntu-Bold.ttf */,
+				D63C0ACD2729C8D800834842 /* Ubuntu-Medium.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -125,6 +145,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D63C0ACE2729C92900834842 /* Ubuntu-Bold.ttf in Resources */,
+				D63C0ACF2729C92C00834842 /* Ubuntu-Medium.ttf in Resources */,
 				D63C0ABA2729AC3A00834842 /* LaunchScreen.storyboard in Resources */,
 				D63C0AB72729AC3A00834842 /* Assets.xcassets in Resources */,
 				D63C0AB52729AC3600834842 /* Main.storyboard in Resources */,
@@ -138,9 +160,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D63C0AB22729AC3600834842 /* ViewController.swift in Sources */,
+				D63C0AB22729AC3600834842 /* LoginViewController.swift in Sources */,
+				D63C0AC42729ADEC00834842 /* MenuViewController.swift in Sources */,
 				D63C0AAE2729AC3600834842 /* AppDelegate.swift in Sources */,
 				D63C0AB02729AC3600834842 /* SceneDelegate.swift in Sources */,
+				D63C0AC22729AD9E00834842 /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
