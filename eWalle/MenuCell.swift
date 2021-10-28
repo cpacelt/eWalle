@@ -30,6 +30,7 @@ class MenuCell: UITableViewCell {
         
         if selected {
             cellBookmarkView.backgroundColor = self.tintColor
+            
             //Need to becom global an enum
             cellLabel.font = UIFont.boldSystemFont(ofSize: 16)
             cellLabel.sizeToFit()
@@ -42,6 +43,7 @@ class MenuCell: UITableViewCell {
     
     // MARK: Prepare for showing
     func prepareToShow() {
+        self.backgroundColor = UIColor(red: 0.898, green: 0.898, blue: 0.898, alpha: 1)
         self.selectionStyle = .none
     }
     
@@ -52,7 +54,7 @@ class MenuCell: UITableViewCell {
         cellBookmarkView.leftAnchor.constraint(equalTo: self.contentView.leftAnchor).isActive = true
         cellBookmarkView.topAnchor.constraint(equalTo: self.contentView.topAnchor).isActive = true
         cellBookmarkView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor).isActive = true
-        cellBookmarkView.rightAnchor.constraint(equalTo: self.contentView.leftAnchor, constant: 2).isActive = true
+        cellBookmarkView.rightAnchor.constraint(equalTo: self.contentView.leftAnchor, constant: 4).isActive = true
     }
     
 

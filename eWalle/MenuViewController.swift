@@ -22,6 +22,12 @@ class MenuViewController: UIViewController {
     //Menu table
     @IBOutlet weak var menuTableView: UITableView!
     
+    //Buttons
+    @IBOutlet weak var logoutButton: UIButton!
+    @IBOutlet weak var menuCloseButton: UIButton!
+    
+    @IBOutlet weak var versionLabel: UILabel!
+    
     //MARK: - LifeCircle methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +40,14 @@ class MenuViewController: UIViewController {
     
     //MARK: - Subviews preparation
     func prepareSubviews(){
+
+        
+        view.backgroundColor = UIColor(red: 0.898, green: 0.898, blue: 0.898, alpha: 1)
+        menuTableView.backgroundColor = UIColor(red: 0.898, green: 0.898, blue: 0.898, alpha: 1)
+        
+        accountBackgroundRoundedView.backgroundColor = .white
+        
+        
         // Account view
         accountBackgroundRoundedView.layer.cornerRadius = 50
         accountBackgroundRoundedView.clipsToBounds = true
@@ -44,6 +58,12 @@ class MenuViewController: UIViewController {
     }
     
     //MARK: - Actions
+    
+    @IBAction func menuCloseButtonAction(_ sender: UIButton) {
+    }
+    
+    @IBAction func logoutButtonAction(_ sender: UIButton) {
+    }
     
     //MARK: - Constraints setup method
     func constraintsSetup() {
@@ -58,7 +78,7 @@ class MenuViewController: UIViewController {
         accountBackgroundRoundedView.bottomAnchor.constraint(equalTo: view.topAnchor, constant: accountBackgroundRoundedView.layer.cornerRadius * 1.0 * 2.5).isActive = true
         
         accountStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30).isActive = true
-        accountStackView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
+        accountStackView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 40).isActive = true
         accountStackView.rightAnchor.constraint(equalTo: accountBackgroundRoundedView.rightAnchor, constant: -20).isActive = true
         accountStackView.bottomAnchor.constraint(equalTo: accountBackgroundRoundedView.bottomAnchor, constant: -20).isActive = true
     }
