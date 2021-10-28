@@ -30,7 +30,10 @@ class ServiceCell: UICollectionViewCell {
     
     // MARK: Prepare for showing
     func prepareToShow() {
-    
+        
+        self.contentView.backgroundColor = .systemIndigo
+        self.contentView.layer.cornerRadius = 10
+        self.contentView.clipsToBounds = true
     }
     
     //MARK: - Constraints setup

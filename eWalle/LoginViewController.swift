@@ -34,6 +34,10 @@ class LoginViewController: UIViewController {
     
     // signInButton pressed
     @IBAction func signInAction(_ sender: UIButton) {
+        
+        //Routing without router! Need to rewrite!
+        //self.show(HomeViewController(), sender: self)
+        self.present(HomeViewController(), animated: true, completion: nil)
     }
     
     // signUpButton pressed
