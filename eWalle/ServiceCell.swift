@@ -31,14 +31,34 @@ class ServiceCell: UICollectionViewCell {
     // MARK: Prepare for showing
     func prepareToShow() {
         
-        self.contentView.backgroundColor = .systemIndigo
-        self.contentView.layer.cornerRadius = 10
-        self.contentView.clipsToBounds = true
+        imageBackgroundView.contentMode = .scaleAspectFill
+        
+        self.imageBackgroundView.layer.backgroundColor = UIColor(red: 0.945, green: 0.953, blue: 0.965, alpha: 1).cgColor
+        self.imageBackgroundView.layer.cornerRadius = 12
+        self.imageBackgroundView.clipsToBounds = true
     }
     
     //MARK: - Constraints setup
     func setupConstraints() {
       
+        cellStackView.translatesAutoresizingMaskIntoConstraints = false
+        serviceImageView.translatesAutoresizingMaskIntoConstraints = false
+        imageBackgroundView.translatesAutoresizingMaskIntoConstraints = false
+        
+        
+        imageBackgroundView.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        imageBackgroundView.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        
+        serviceImageView.centerXAnchor.constraint(equalTo: imageBackgroundView.centerXAnchor).isActive = true
+        serviceImageView.centerYAnchor.constraint(equalTo: imageBackgroundView.centerYAnchor).isActive = true
+        
+
+        
+        cellStackView.leftAnchor.constraint(equalTo: contentView.leftAnchor).isActive = true
+        cellStackView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
+        cellStackView.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive = true
+       // cellStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        
     }
     
     

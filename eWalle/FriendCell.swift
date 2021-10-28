@@ -21,6 +21,7 @@ class FriendCell: UICollectionViewCell {
         super.awakeFromNib()
         // Initialization code
 
+        prepareToShow()
         setupConstraints()
     }
     

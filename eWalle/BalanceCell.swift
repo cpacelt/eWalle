@@ -25,9 +25,6 @@ class BalanceCell: UICollectionViewCell {
     
     // MARK: Life circle methods
     
-    override func layoutSubviews() {
-        //setupConstraints()
-    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -41,7 +38,9 @@ class BalanceCell: UICollectionViewCell {
     // MARK: Prepare for showing
     func prepareToShow() {
         
+
         balanceLabel.sizeToFit()
+        
         
         self.contentView.layer.backgroundColor = UIColor(red: 0.945, green: 0.953, blue: 0.965, alpha: 1).cgColor
         self.contentView.layer.cornerRadius = 12
@@ -59,6 +58,7 @@ class BalanceCell: UICollectionViewCell {
         cellStackView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -20).isActive = true
         cellStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
       
+  
     }
     //MARK: - Actions
     @IBAction func addButtonAction(_ sender: UIButton) {
