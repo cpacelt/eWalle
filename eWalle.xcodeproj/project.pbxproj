@@ -18,6 +18,7 @@
 		D63C0AC42729ADEC00834842 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D63C0AC32729ADEC00834842 /* MenuViewController.swift */; };
 		D63C0ACE2729C92900834842 /* Ubuntu-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D63C0ACC2729C8D800834842 /* Ubuntu-Bold.ttf */; };
 		D63C0ACF2729C92C00834842 /* Ubuntu-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D63C0ACD2729C8D800834842 /* Ubuntu-Medium.ttf */; };
+		D65A07C0272B01C6005B93B4 /* HomeHeaderReusibleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65A07BF272B01C6005B93B4 /* HomeHeaderReusibleView.swift */; };
 		D65E1E2E272ADE4500BFBDF9 /* AddFriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65E1E2D272ADE4500BFBDF9 /* AddFriendCell.swift */; };
 		D6B94518272AE55200692155 /* SectionHeaderReusibleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B94517272AE55200692155 /* SectionHeaderReusibleView.swift */; };
 		D6FC2C86272A84F600893A8B /* FriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6FC2C85272A84F600893A8B /* FriendCell.swift */; };
@@ -39,6 +40,7 @@
 		D63C0AC32729ADEC00834842 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		D63C0ACC2729C8D800834842 /* Ubuntu-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Bold.ttf"; sourceTree = "<group>"; };
 		D63C0ACD2729C8D800834842 /* Ubuntu-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Medium.ttf"; sourceTree = "<group>"; };
+		D65A07BF272B01C6005B93B4 /* HomeHeaderReusibleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeHeaderReusibleView.swift; sourceTree = "<group>"; };
 		D65E1E2D272ADE4500BFBDF9 /* AddFriendCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendCell.swift; sourceTree = "<group>"; };
 		D6B94517272AE55200692155 /* SectionHeaderReusibleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderReusibleView.swift; sourceTree = "<group>"; };
 		D6FC2C85272A84F600893A8B /* FriendCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendCell.swift; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 				D63C0AC32729ADEC00834842 /* MenuViewController.swift */,
 				D62EE17C2729EC8100D15748 /* MenuCell.swift */,
 				D63C0AC12729AD9E00834842 /* HomeViewController.swift */,
+				D65A07BF272B01C6005B93B4 /* HomeHeaderReusibleView.swift */,
 				D6B94517272AE55200692155 /* SectionHeaderReusibleView.swift */,
 				D6FC2C89272A855A00893A8B /* ServiceCell.swift */,
 				D6FC2C87272A853400893A8B /* BalanceCell.swift */,
@@ -181,6 +184,7 @@
 				D6FC2C86272A84F600893A8B /* FriendCell.swift in Sources */,
 				D65E1E2E272ADE4500BFBDF9 /* AddFriendCell.swift in Sources */,
 				D63C0AB22729AC3600834842 /* LoginViewController.swift in Sources */,
+				D65A07C0272B01C6005B93B4 /* HomeHeaderReusibleView.swift in Sources */,
 				D6FC2C88272A853400893A8B /* BalanceCell.swift in Sources */,
 				D6FC2C8A272A855A00893A8B /* ServiceCell.swift in Sources */,
 				D63C0AC42729ADEC00834842 /* MenuViewController.swift in Sources */,
