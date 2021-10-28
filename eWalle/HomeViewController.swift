@@ -10,7 +10,7 @@ import UIKit
 
 
 class HomeViewController: UICollectionViewController {
-    
+        
     private var storyBoardCollectionView: UICollectionView?
     
     
@@ -20,10 +20,10 @@ class HomeViewController: UICollectionViewController {
         case friends
         case services
         
-        var cellsCount: Int {
+        var cellsCount: Int{
             switch self {
             case .balance: return 1
-            case .friends: return 7
+            case .friends: return 5
             case .services: return 8
             }
         }
@@ -232,10 +232,14 @@ extension HomeViewController {
         return cell
     }
     
+    
+    
     func balanceCellSetup(for indexPath: IndexPath) -> BalanceCell {
         let cell = storyBoardCollectionView!.dequeueReusableCell(withReuseIdentifier: BalanceCell.reuseIdentifier, for: indexPath) as! BalanceCell
         return cell
     }
+    
+    
     
     func servicesCellSetup(for indexPath: IndexPath) -> ServiceCell {
         let cell = storyBoardCollectionView!.dequeueReusableCell(withReuseIdentifier: ServiceCell.reuseIdentifier, for: indexPath) as! ServiceCell

@@ -37,7 +37,9 @@ class LoginViewController: UIViewController {
         
         //Routing without router! Need to rewrite!
         //self.show(HomeViewController(), sender: self)
-        self.present(HomeViewController(), animated: true, completion: nil)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "HomeViewController")
+        self.present(vc, animated: true, completion: nil)
     }
     
     // signUpButton pressed
