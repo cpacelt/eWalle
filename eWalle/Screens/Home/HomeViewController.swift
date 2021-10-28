@@ -10,9 +10,8 @@ import UIKit
 
 
 class HomeViewController: UICollectionViewController {
-        
-    private var storyBoardCollectionView: UICollectionView?
     
+    private var storyBoardCollectionView: UICollectionView?
     
     // MARK: - Collection view layout
     enum Section: Int, CaseIterable {
@@ -145,21 +144,17 @@ class HomeViewController: UICollectionViewController {
     
     
     //MARK: - Life circle methods
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        storyBoardCollectionView = collectionView
-        collectionView = UICollectionView(frame: storyBoardCollectionView!.frame, collectionViewLayout: layout)
-        collectionView.register(SectionHeaderReusibleView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: SectionHeaderReusibleView.reuseIdentifier)
-        collectionView.register(HomeHeaderReusibleView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HomeHeaderReusibleView.reuseIdentifier)
+        collectionViewSetup()
         
     }
     
 }
 
 
-// MARK: UICollectionViewDataSource methods
+// MARK: CollectionView DataSource
 extension HomeViewController {
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -177,9 +172,9 @@ extension HomeViewController {
         guard let sectionKind = Section(rawValue: indexPath.section) else { return UICollectionViewCell() }
         
         switch sectionKind {
-            case .friends: return friendCellSetup(for: indexPath)
-            case .balance: return balanceCellSetup(for: indexPath)
-            case .services: return servicesCellSetup(for: indexPath)
+        case .friends: return friendCellSetup(for: indexPath)
+        case .balance: return balanceCellSetup(for: indexPath)
+        case .services: return servicesCellSetup(for: indexPath)
         }
         
     }
@@ -210,14 +205,14 @@ extension HomeViewController {
 }
 
 
-// MARK: UICollectionViewDelegate methods
+// MARK: CollectionView Delegate
 extension HomeViewController {
     
     
 }
 
 
-//MARK: Cells setup methods
+//MARK: Cells setup
 extension HomeViewController {
     
     func friendCellSetup(for indexPath: IndexPath) -> UICollectionViewCell {
@@ -246,8 +241,16 @@ extension HomeViewController {
         return cell
     }
     
-    
-    
+}
+
+//MARK: - CollectionView setup
+extension HomeViewController {
+    fileprivate func collectionViewSetup() {
+        storyBoardCollectionView = collectionView
+        collectionView = UICollectionView(frame: storyBoardCollectionView!.frame, collectionViewLayout: layout)
+        collectionView.register(SectionHeaderReusibleView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: SectionHeaderReusibleView.reuseIdentifier)
+        collectionView.register(HomeHeaderReusibleView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HomeHeaderReusibleView.reuseIdentifier)
+    }
 }
 
 

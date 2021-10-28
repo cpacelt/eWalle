@@ -43,6 +43,7 @@ class MenuCell: UITableViewCell {
     
     // MARK: Prepare for showing
     func prepareToShow() {
+        cellLabel.adjustsFontSizeToFitWidth = true
         self.backgroundColor = UIColor(red: 0.898, green: 0.898, blue: 0.898, alpha: 1)
         self.selectionStyle = .none
     }

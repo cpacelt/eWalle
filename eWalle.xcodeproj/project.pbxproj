@@ -18,6 +18,8 @@
 		D63C0AC42729ADEC00834842 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D63C0AC32729ADEC00834842 /* MenuViewController.swift */; };
 		D63C0ACE2729C92900834842 /* Ubuntu-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D63C0ACC2729C8D800834842 /* Ubuntu-Bold.ttf */; };
 		D63C0ACF2729C92C00834842 /* Ubuntu-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D63C0ACD2729C8D800834842 /* Ubuntu-Medium.ttf */; };
+		D6599B18272B2FD300F4F959 /* MenuPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6599B17272B2FD300F4F959 /* MenuPresenter.swift */; };
+		D6599B1A272B342700F4F959 /* MenuInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6599B19272B342700F4F959 /* MenuInteractor.swift */; };
 		D65A07C0272B01C6005B93B4 /* HomeHeaderReusibleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65A07BF272B01C6005B93B4 /* HomeHeaderReusibleView.swift */; };
 		D65A07C2272B1769005B93B4 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65A07C1272B1769005B93B4 /* Model.swift */; };
 		D65E1E2E272ADE4500BFBDF9 /* AddFriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65E1E2D272ADE4500BFBDF9 /* AddFriendCell.swift */; };
@@ -41,6 +43,8 @@
 		D63C0AC32729ADEC00834842 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		D63C0ACC2729C8D800834842 /* Ubuntu-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Bold.ttf"; sourceTree = "<group>"; };
 		D63C0ACD2729C8D800834842 /* Ubuntu-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Medium.ttf"; sourceTree = "<group>"; };
+		D6599B17272B2FD300F4F959 /* MenuPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuPresenter.swift; sourceTree = "<group>"; };
+		D6599B19272B342700F4F959 /* MenuInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuInteractor.swift; sourceTree = "<group>"; };
 		D65A07BF272B01C6005B93B4 /* HomeHeaderReusibleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeHeaderReusibleView.swift; sourceTree = "<group>"; };
 		D65A07C1272B1769005B93B4 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		D65E1E2D272ADE4500BFBDF9 /* AddFriendCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendCell.swift; sourceTree = "<group>"; };
@@ -80,23 +84,14 @@
 		D63C0AAC2729AC3600834842 /* eWalle */ = {
 			isa = PBXGroup;
 			children = (
-				D63C0ACB2729C88700834842 /* Fonts */,
+				D63C0AAF2729AC3600834842 /* SceneDelegate.swift */,
 				D63C0AAD2729AC3600834842 /* AppDelegate.swift */,
 				D65A07C1272B1769005B93B4 /* Model.swift */,
-				D63C0AAF2729AC3600834842 /* SceneDelegate.swift */,
-				D63C0AB12729AC3600834842 /* LoginViewController.swift */,
-				D63C0AC32729ADEC00834842 /* MenuViewController.swift */,
-				D62EE17C2729EC8100D15748 /* MenuCell.swift */,
-				D63C0AC12729AD9E00834842 /* HomeViewController.swift */,
-				D65A07BF272B01C6005B93B4 /* HomeHeaderReusibleView.swift */,
-				D6B94517272AE55200692155 /* SectionHeaderReusibleView.swift */,
-				D6FC2C89272A855A00893A8B /* ServiceCell.swift */,
-				D6FC2C87272A853400893A8B /* BalanceCell.swift */,
-				D6FC2C85272A84F600893A8B /* FriendCell.swift */,
-				D65E1E2D272ADE4500BFBDF9 /* AddFriendCell.swift */,
+				D6599B13272B2DA400F4F959 /* Screens */,
 				D63C0AB32729AC3600834842 /* Main.storyboard */,
-				D63C0AB62729AC3A00834842 /* Assets.xcassets */,
 				D63C0AB82729AC3A00834842 /* LaunchScreen.storyboard */,
+				D63C0AB62729AC3A00834842 /* Assets.xcassets */,
+				D63C0ACB2729C88700834842 /* Fonts */,
 				D63C0ABB2729AC3A00834842 /* Info.plist */,
 			);
 			path = eWalle;
@@ -109,6 +104,65 @@
 				D63C0ACD2729C8D800834842 /* Ubuntu-Medium.ttf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		D6599B13272B2DA400F4F959 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				D6599B16272B2DD400F4F959 /* Menu */,
+				D6599B15272B2DB600F4F959 /* Home */,
+				D6599B14272B2DAD00F4F959 /* Login */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		D6599B14272B2DAD00F4F959 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				D63C0AB12729AC3600834842 /* LoginViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		D6599B15272B2DB600F4F959 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				D63C0AC12729AD9E00834842 /* HomeViewController.swift */,
+				D6599B1C272B3D8E00F4F959 /* Views */,
+				D6599B1B272B3D5A00F4F959 /* Cells */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		D6599B16272B2DD400F4F959 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				D63C0AC32729ADEC00834842 /* MenuViewController.swift */,
+				D62EE17C2729EC8100D15748 /* MenuCell.swift */,
+				D6599B17272B2FD300F4F959 /* MenuPresenter.swift */,
+				D6599B19272B342700F4F959 /* MenuInteractor.swift */,
+			);
+			path = Menu;
+			sourceTree = "<group>";
+		};
+		D6599B1B272B3D5A00F4F959 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				D65E1E2D272ADE4500BFBDF9 /* AddFriendCell.swift */,
+				D6FC2C85272A84F600893A8B /* FriendCell.swift */,
+				D6FC2C87272A853400893A8B /* BalanceCell.swift */,
+				D6FC2C89272A855A00893A8B /* ServiceCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		D6599B1C272B3D8E00F4F959 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D65A07BF272B01C6005B93B4 /* HomeHeaderReusibleView.swift */,
+				D6B94517272AE55200692155 /* SectionHeaderReusibleView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -184,6 +238,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D6599B1A272B342700F4F959 /* MenuInteractor.swift in Sources */,
 				D6FC2C86272A84F600893A8B /* FriendCell.swift in Sources */,
 				D65E1E2E272ADE4500BFBDF9 /* AddFriendCell.swift in Sources */,
 				D63C0AB22729AC3600834842 /* LoginViewController.swift in Sources */,
@@ -197,6 +252,7 @@
 				D63C0AB02729AC3600834842 /* SceneDelegate.swift in Sources */,
 				D6B94518272AE55200692155 /* SectionHeaderReusibleView.swift in Sources */,
 				D63C0AC22729AD9E00834842 /* HomeViewController.swift in Sources */,
+				D6599B18272B2FD300F4F959 /* MenuPresenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

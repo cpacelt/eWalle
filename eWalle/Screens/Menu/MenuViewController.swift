@@ -7,7 +7,20 @@
 
 import UIKit
 
+protocol DisplayLogic: AnyObject {
+    
+    func displayMenu(with data: [String])
+    func cleanSwiftAssembly()
+}
+
+
 class MenuViewController: UIViewController {
+    //MARK: - Presenter reference
+    var presenter: PresentationLogic?
+    var interactor: BusinessLogic?
+    
+    // MARK: - Data cash
+    var data = [String]()
     
     //MARK: - IBOutlets
     @IBOutlet weak var accountBackgroundRoundedView: UIView!
@@ -28,6 +41,17 @@ class MenuViewController: UIViewController {
     
     @IBOutlet weak var versionLabel: UILabel!
     
+    //MARK: - Inits
+//    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+//        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+//
+//
+//    }
+//
+//    required init?(coder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
+    
     //MARK: - LifeCircle methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +59,10 @@ class MenuViewController: UIViewController {
         // Do any additional setup after loading the view.
         prepareSubviews()
         constraintsSetup()
+        
+        // Asembling...
+        cleanSwiftAssembly()
+        interactor?.fetchMenuData()
     }
     
     
@@ -90,7 +118,7 @@ class MenuViewController: UIViewController {
 extension MenuViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return data.count
     }
     
 }
@@ -100,8 +128,36 @@ extension MenuViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = menuTableView.dequeueReusableCell(withIdentifier: MenuCell.reuseIdentifier) as! MenuCell
         
+        cell.cellLabel.text = data[indexPath.row]
+        cell.cellLabel.sizeToFit()
+        
         return cell
     }
     
 
+}
+
+// MARK: - Display Logic
+extension MenuViewController: DisplayLogic {
+    func displayMenu(with data: [String]) {
+        self.data = data
+        menuTableView.reloadData()
+        
+    }
+    
+    
+// MARK: - Clean swift assembly
+    func cleanSwiftAssembly() {
+        let vc = self
+        let presenter = MenuPresenter()
+        let interactor = MenuInteractor()
+        
+        vc.presenter = presenter
+        vc.interactor = interactor
+        interactor.presenter = presenter
+        presenter.viewController = vc
+        
+    }
+    
+    
 }
