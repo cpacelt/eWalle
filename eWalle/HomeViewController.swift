@@ -63,14 +63,14 @@ class HomeViewController: UICollectionViewController {
             
             let section = NSCollectionLayoutSection(group: group)
             
-            /*
+            
             let footerHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                                                       heightDimension: .absolute(50.0))
                         let header = NSCollectionLayoutBoundarySupplementaryItem(
                             layoutSize: footerHeaderSize,
                             elementKind: UICollectionView.elementKindSectionHeader,
                             alignment: .top)
-            section.boundarySupplementaryItems = [header] */
+            section.boundarySupplementaryItems = [header] 
             
             
             section.contentInsets = .init(top: 20, leading: 20, bottom: 20, trailing: 20)
@@ -90,6 +90,15 @@ class HomeViewController: UICollectionViewController {
             let section = NSCollectionLayoutSection(group: group)
             section.orthogonalScrollingBehavior = .continuous
             
+            let footerHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                                                      heightDimension: .absolute(50.0))
+                        let header = NSCollectionLayoutBoundarySupplementaryItem(
+                            layoutSize: footerHeaderSize,
+                            elementKind: UICollectionView.elementKindSectionHeader,
+                            alignment: .top)
+            section.boundarySupplementaryItems = [header]
+            
+            
             section.contentInsets = .init(top: 20, leading: 0, bottom: 20, trailing: 20)
             return section
         }
@@ -105,6 +114,15 @@ class HomeViewController: UICollectionViewController {
             let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 4/*columns*/)
             
             let section = NSCollectionLayoutSection(group: group)
+            
+            let footerHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                                                      heightDimension: .absolute(50.0))
+                        let header = NSCollectionLayoutBoundarySupplementaryItem(
+                            layoutSize: footerHeaderSize,
+                            elementKind: UICollectionView.elementKindSectionHeader,
+                            alignment: .top)
+            section.boundarySupplementaryItems = [header]
+            
             
             section.contentInsets = .init(top: 20, leading: 20, bottom: 10, trailing: 20)
             return section
@@ -142,7 +160,7 @@ class HomeViewController: UICollectionViewController {
         
         storyBoardCollectionView = collectionView
         collectionView = UICollectionView(frame: storyBoardCollectionView!.frame, collectionViewLayout: layout)
-        
+        collectionView.register(SectionHeaderReusibleView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: SectionHeaderReusibleView.reuseIdentifier)
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
     }
@@ -188,6 +206,12 @@ extension HomeViewController {
         }
         
         return cell
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: SectionHeaderReusibleView.reuseIdentifier, for: indexPath) as! SectionHeaderReusibleView
+        
+        return view
     }
     
     
