@@ -7,22 +7,24 @@
 
 import Foundation
 
-protocol PresentationLogic: AnyObject {
-    func presentMenuData(data: [String])
+protocol MenuPresentationLogic: AnyObject {
+    func presentMenuData(data: [AppScreen])
 }
 
 
 class MenuPresenter {
     //MARK: - VC reference
-    weak var viewController: DisplayLogic?
+    weak var viewController: MenuDisplayLogic?
 }
 
 
 // MARK: - Presentation logic
-extension MenuPresenter: PresentationLogic {
+extension MenuPresenter: MenuPresentationLogic {
     
-    func presentMenuData(data: [String]) {
-        viewController?.displayMenu(with: data)
+    func presentMenuData(data: [AppScreen]) {
+        var titles: [String] = []
+        data.forEach { titles.append($0.title ?? "") }
+        viewController?.displayMenu(with: titles)
     }
     
     

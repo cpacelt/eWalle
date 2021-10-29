@@ -20,10 +20,19 @@ class SectionHeaderReusibleView: UICollectionReusableView {
         return label
     }()
     
+    let rightButton: UIButton = {
+        let button = UIButton()
+        let img = UIImage(named: "homeHederButton")
+        button.setImage(img, for: .normal)
+        
+        return button
+    }()
+    
     override init(frame: CGRect){
         super.init(frame: frame)
 
         self.addSubview(label)
+        self.addSubview(rightButton)
         
         setupConstraints()
     }
@@ -34,10 +43,14 @@ class SectionHeaderReusibleView: UICollectionReusableView {
     
     func setupConstraints() {
         label.translatesAutoresizingMaskIntoConstraints = false
+        rightButton.translatesAutoresizingMaskIntoConstraints = false
         
         label.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         label.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
         label.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         label.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
+        
+        rightButton.centerYAnchor.constraint(equalTo: label.centerYAnchor).isActive = true
+        rightButton.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
     }
 }

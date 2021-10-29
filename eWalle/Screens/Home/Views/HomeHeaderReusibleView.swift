@@ -15,6 +15,7 @@ final class HomeHeaderReusibleView: UICollectionReusableView {
     
     
     //MARK: - Subviews
+    
     let viewStackView: UIStackView = {
         let stack = UIStackView()
         stack.axis = .vertical
@@ -30,7 +31,6 @@ final class HomeHeaderReusibleView: UICollectionReusableView {
         stack.spacing = 10.0
         return stack
     }()
-    
     
     let logoImageView: UIImageView = {
         let imageView = UIImageView()
@@ -57,6 +57,13 @@ final class HomeHeaderReusibleView: UICollectionReusableView {
         return label
     }()
     
+    let rightButton: UIButton = {
+        let button = UIButton()
+        let img = UIImage(named: "homeHederButton")
+        button.setImage(img, for: .normal)
+        
+        return button
+    }()
     
     
     //MARK: - Inits
@@ -67,9 +74,6 @@ final class HomeHeaderReusibleView: UICollectionReusableView {
     override init(frame: CGRect){
         super.init(frame: CGRect.zero)
 
-      //  self.addSubview(logoImageView)
-      //  self.addSubview(appTitleLabel)
-        
         logoStackView.addArrangedSubview(logoImageView)
         logoStackView.addArrangedSubview(appTitleLabel)
         
@@ -77,6 +81,7 @@ final class HomeHeaderReusibleView: UICollectionReusableView {
         viewStackView.addArrangedSubview(firstSectionLabel)
         
         self.addSubview(viewStackView)
+        self.addSubview(rightButton)
         
        // self.viewStackView.backgroundColor = .systemIndigo
         makeLayout()
@@ -85,13 +90,16 @@ final class HomeHeaderReusibleView: UICollectionReusableView {
     //MARK: - Constraints setup
     private func makeLayout() {
         viewStackView.translatesAutoresizingMaskIntoConstraints = false
-        //appTitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        rightButton.translatesAutoresizingMaskIntoConstraints = false
         
         
         viewStackView.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
         viewStackView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         viewStackView.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
         viewStackView.heightAnchor.constraint(equalTo: self.heightAnchor).isActive = true
+        
+        rightButton.topAnchor.constraint(equalTo: self.topAnchor, constant: 20).isActive = true
+        rightButton.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -10).isActive = true
     }
 }
 

@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol DisplayLogic: AnyObject {
+protocol MenuDisplayLogic: AnyObject {
     
     func displayMenu(with data: [String])
     func cleanSwiftAssembly()
@@ -16,11 +16,11 @@ protocol DisplayLogic: AnyObject {
 
 class MenuViewController: UIViewController {
     //MARK: - Presenter reference
-    var presenter: PresentationLogic?
-    var interactor: BusinessLogic?
+    var presenter: MenuPresentationLogic?
+    var interactor: MenuBusinessLogic?
     
     // MARK: - Data cash
-    var data = [String]()
+    var menuTitles = [String]()
     
     //MARK: - IBOutlets
     @IBOutlet weak var accountBackgroundRoundedView: UIView!
@@ -35,6 +35,7 @@ class MenuViewController: UIViewController {
     //Menu table
     @IBOutlet weak var menuTableView: UITableView!
     
+    @IBOutlet weak var selectedVCImageView: UIImageView!
     //Buttons
     @IBOutlet weak var logoutButton: UIButton!
     @IBOutlet weak var menuCloseButton: UIButton!
@@ -67,9 +68,8 @@ class MenuViewController: UIViewController {
     
     
     //MARK: - Subviews preparation
-    func prepareSubviews(){
+    fileprivate func prepareSubviews(){
 
-        
         view.backgroundColor = UIColor(red: 0.898, green: 0.898, blue: 0.898, alpha: 1)
         menuTableView.backgroundColor = UIColor(red: 0.898, green: 0.898, blue: 0.898, alpha: 1)
         
@@ -85,6 +85,12 @@ class MenuViewController: UIViewController {
         menuTableView.delegate = self
     }
     
+    fileprivate func switchSelectedVCImageView(for indexPath: IndexPath) {
+        DispatchQueue.main.async {
+            self.selectedVCImageView.image = self.view.snapshot
+        }
+    }
+    
     //MARK: - Actions
     
     @IBAction func menuCloseButtonAction(_ sender: UIButton) {
@@ -94,7 +100,7 @@ class MenuViewController: UIViewController {
     }
     
     //MARK: - Constraints setup method
-    func constraintsSetup() {
+    fileprivate func constraintsSetup() {
         
         accountBackgroundRoundedView.translatesAutoresizingMaskIntoConstraints = false
         accountStackView.translatesAutoresizingMaskIntoConstraints = false
@@ -110,6 +116,8 @@ class MenuViewController: UIViewController {
         accountStackView.rightAnchor.constraint(equalTo: accountBackgroundRoundedView.rightAnchor, constant: -20).isActive = true
         accountStackView.bottomAnchor.constraint(equalTo: accountBackgroundRoundedView.bottomAnchor, constant: -20).isActive = true
     }
+    
+    
 
 }
 
@@ -118,7 +126,7 @@ class MenuViewController: UIViewController {
 extension MenuViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return data.count
+        return menuTitles.count
     }
     
 }
@@ -128,19 +136,25 @@ extension MenuViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = menuTableView.dequeueReusableCell(withIdentifier: MenuCell.reuseIdentifier) as! MenuCell
         
-        cell.cellLabel.text = data[indexPath.row]
+        cell.cellLabel.text = menuTitles[indexPath.row]
         cell.cellLabel.sizeToFit()
         
         return cell
     }
     
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switchSelectedVCImageView(for: indexPath)
+    }
 
 }
 
+
+
 // MARK: - Display Logic
-extension MenuViewController: DisplayLogic {
+extension MenuViewController: MenuDisplayLogic {
     func displayMenu(with data: [String]) {
-        self.data = data
+        self.menuTitles = data
         menuTableView.reloadData()
         
     }
@@ -160,4 +174,14 @@ extension MenuViewController: DisplayLogic {
     }
     
     
+}
+
+// MARK: Take screenshot
+extension UIView {
+    var snapshot: UIImage {
+        return UIGraphicsImageRenderer(size: bounds.size).image { _ in
+            drawHierarchy(in: bounds, afterScreenUpdates: true)
+        }
+    }
+
 }

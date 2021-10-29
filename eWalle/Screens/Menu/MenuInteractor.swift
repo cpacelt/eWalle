@@ -7,22 +7,29 @@
 
 import Foundation
 
-protocol BusinessLogic: AnyObject {
+protocol MenuBusinessLogic: AnyObject {
     func fetchMenuData()
 }
 
 class MenuInteractor {
-    var presenter: PresentationLogic?
+    var presenter: MenuPresentationLogic?
+    
+    //MARK: Screens data placeholder
+    var placeholder: [AppScreen] = []
 }
 
 // MARK: - Business logic
-extension MenuInteractor: BusinessLogic {
+extension MenuInteractor: MenuBusinessLogic {
     
-    
+    //Fetch titles for menu
     func fetchMenuData() {
         
+        let homeScreen = AppScreen(titled: "Home")
+        let friendsScreen = AppScreen(titled: "Friends")
+        let loginScreen = AppScreen(titled: "Login")
+        
+        placeholder = [homeScreen, friendsScreen, loginScreen]
         // Put code here...
-        let placeholder = ["Home", "Credits", "Services", "Recent"]
         presenter?.presentMenuData(data: placeholder)
     }
     

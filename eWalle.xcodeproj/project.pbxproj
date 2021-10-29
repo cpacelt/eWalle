@@ -21,8 +21,11 @@
 		D6599B18272B2FD300F4F959 /* MenuPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6599B17272B2FD300F4F959 /* MenuPresenter.swift */; };
 		D6599B1A272B342700F4F959 /* MenuInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6599B19272B342700F4F959 /* MenuInteractor.swift */; };
 		D65A07C0272B01C6005B93B4 /* HomeHeaderReusibleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65A07BF272B01C6005B93B4 /* HomeHeaderReusibleView.swift */; };
-		D65A07C2272B1769005B93B4 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65A07C1272B1769005B93B4 /* Model.swift */; };
+		D65A07C2272B1769005B93B4 /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65A07C1272B1769005B93B4 /* HomeModel.swift */; };
 		D65E1E2E272ADE4500BFBDF9 /* AddFriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65E1E2D272ADE4500BFBDF9 /* AddFriendCell.swift */; };
+		D683A612272BF49300D79934 /* MenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D683A611272BF49300D79934 /* MenuModel.swift */; };
+		D683A614272C0A0300D79934 /* HomeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D683A613272C0A0300D79934 /* HomeInteractor.swift */; };
+		D683A616272C0A1800D79934 /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D683A615272C0A1800D79934 /* HomePresenter.swift */; };
 		D6B94518272AE55200692155 /* SectionHeaderReusibleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B94517272AE55200692155 /* SectionHeaderReusibleView.swift */; };
 		D6FC2C86272A84F600893A8B /* FriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6FC2C85272A84F600893A8B /* FriendCell.swift */; };
 		D6FC2C88272A853400893A8B /* BalanceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6FC2C87272A853400893A8B /* BalanceCell.swift */; };
@@ -46,8 +49,11 @@
 		D6599B17272B2FD300F4F959 /* MenuPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuPresenter.swift; sourceTree = "<group>"; };
 		D6599B19272B342700F4F959 /* MenuInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuInteractor.swift; sourceTree = "<group>"; };
 		D65A07BF272B01C6005B93B4 /* HomeHeaderReusibleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeHeaderReusibleView.swift; sourceTree = "<group>"; };
-		D65A07C1272B1769005B93B4 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		D65A07C1272B1769005B93B4 /* HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
 		D65E1E2D272ADE4500BFBDF9 /* AddFriendCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendCell.swift; sourceTree = "<group>"; };
+		D683A611272BF49300D79934 /* MenuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuModel.swift; sourceTree = "<group>"; };
+		D683A613272C0A0300D79934 /* HomeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeInteractor.swift; sourceTree = "<group>"; };
+		D683A615272C0A1800D79934 /* HomePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePresenter.swift; sourceTree = "<group>"; };
 		D6B94517272AE55200692155 /* SectionHeaderReusibleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderReusibleView.swift; sourceTree = "<group>"; };
 		D6FC2C85272A84F600893A8B /* FriendCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendCell.swift; sourceTree = "<group>"; };
 		D6FC2C87272A853400893A8B /* BalanceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceCell.swift; sourceTree = "<group>"; };
@@ -86,7 +92,6 @@
 			children = (
 				D63C0AAF2729AC3600834842 /* SceneDelegate.swift */,
 				D63C0AAD2729AC3600834842 /* AppDelegate.swift */,
-				D65A07C1272B1769005B93B4 /* Model.swift */,
 				D6599B13272B2DA400F4F959 /* Screens */,
 				D63C0AB32729AC3600834842 /* Main.storyboard */,
 				D63C0AB82729AC3A00834842 /* LaunchScreen.storyboard */,
@@ -127,6 +132,9 @@
 		D6599B15272B2DB600F4F959 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				D683A613272C0A0300D79934 /* HomeInteractor.swift */,
+				D683A615272C0A1800D79934 /* HomePresenter.swift */,
+				D65A07C1272B1769005B93B4 /* HomeModel.swift */,
 				D63C0AC12729AD9E00834842 /* HomeViewController.swift */,
 				D6599B1C272B3D8E00F4F959 /* Views */,
 				D6599B1B272B3D5A00F4F959 /* Cells */,
@@ -141,6 +149,7 @@
 				D62EE17C2729EC8100D15748 /* MenuCell.swift */,
 				D6599B17272B2FD300F4F959 /* MenuPresenter.swift */,
 				D6599B19272B342700F4F959 /* MenuInteractor.swift */,
+				D683A611272BF49300D79934 /* MenuModel.swift */,
 			);
 			path = Menu;
 			sourceTree = "<group>";
@@ -245,14 +254,17 @@
 				D65A07C0272B01C6005B93B4 /* HomeHeaderReusibleView.swift in Sources */,
 				D6FC2C88272A853400893A8B /* BalanceCell.swift in Sources */,
 				D6FC2C8A272A855A00893A8B /* ServiceCell.swift in Sources */,
-				D65A07C2272B1769005B93B4 /* Model.swift in Sources */,
+				D683A612272BF49300D79934 /* MenuModel.swift in Sources */,
+				D65A07C2272B1769005B93B4 /* HomeModel.swift in Sources */,
 				D63C0AC42729ADEC00834842 /* MenuViewController.swift in Sources */,
 				D62EE17D2729EC8100D15748 /* MenuCell.swift in Sources */,
 				D63C0AAE2729AC3600834842 /* AppDelegate.swift in Sources */,
 				D63C0AB02729AC3600834842 /* SceneDelegate.swift in Sources */,
 				D6B94518272AE55200692155 /* SectionHeaderReusibleView.swift in Sources */,
 				D63C0AC22729AD9E00834842 /* HomeViewController.swift in Sources */,
+				D683A616272C0A1800D79934 /* HomePresenter.swift in Sources */,
 				D6599B18272B2FD300F4F959 /* MenuPresenter.swift in Sources */,
+				D683A614272C0A0300D79934 /* HomeInteractor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

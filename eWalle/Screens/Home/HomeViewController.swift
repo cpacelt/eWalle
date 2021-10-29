@@ -7,9 +7,14 @@
 
 import UIKit
 
+protocol HomeDisplayLogic: AnyObject {
+    func cleanSwiftAssembly()
+}
 
-
-class HomeViewController: UICollectionViewController {
+class HomeViewController: UICollectionViewController{
+    
+    var interactor: HomeBusinessLogic?
+    var presenter: HomePresentationLogic?
     
     private var storyBoardCollectionView: UICollectionView?
     
@@ -49,8 +54,16 @@ class HomeViewController: UICollectionViewController {
             case .friends: return friendsLayout
             case .services: return servicesLayout
             }
+            
         }
         
+        var buttonImage: String{
+            switch self {
+            case .balance: return "homeHeaderButton"
+            case .friends: return "friendsHeaderButton"
+            case .services: return "servicesHeaderButton"
+            }
+        }
         
         
         // MARK: - Balance section layout
@@ -147,6 +160,7 @@ class HomeViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        cleanSwiftAssembly()
         collectionViewSetup()
         
     }
@@ -161,11 +175,9 @@ extension HomeViewController {
         return Section.allCases.count
     }
     
-    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return Section(rawValue: section)!.cellsCount
     }
-    
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
@@ -181,26 +193,9 @@ extension HomeViewController {
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
-        
-        if indexPath.section == 0 {
-            
-            let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HomeHeaderReusibleView.reuseIdentifier, for: indexPath) as! HomeHeaderReusibleView
-            
-            view.firstSectionLabel.text = Section(rawValue: indexPath.section)!.headers
-            return view
-            
-        } else {
-            
-            
-            let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: SectionHeaderReusibleView.reuseIdentifier, for: indexPath) as! SectionHeaderReusibleView
-            
-            view.label.text = Section(rawValue: indexPath.section)!.headers
-            return view
-            
-        }
+        return sectionHeaderSetup(indexPath)
         
     }
-    
     
 }
 
@@ -212,10 +207,10 @@ extension HomeViewController {
 }
 
 
-//MARK: Cells setup
+//MARK: Reusible views setup
 extension HomeViewController {
     
-    func friendCellSetup(for indexPath: IndexPath) -> UICollectionViewCell {
+    fileprivate func friendCellSetup(for indexPath: IndexPath) -> UICollectionViewCell {
         let cell: UICollectionViewCell
         
         if indexPath.row == 0 {
@@ -229,16 +224,39 @@ extension HomeViewController {
     
     
     
-    func balanceCellSetup(for indexPath: IndexPath) -> BalanceCell {
+    fileprivate func balanceCellSetup(for indexPath: IndexPath) -> BalanceCell {
         let cell = storyBoardCollectionView!.dequeueReusableCell(withReuseIdentifier: BalanceCell.reuseIdentifier, for: indexPath) as! BalanceCell
         return cell
     }
     
     
     
-    func servicesCellSetup(for indexPath: IndexPath) -> ServiceCell {
+    fileprivate func servicesCellSetup(for indexPath: IndexPath) -> ServiceCell {
         let cell = storyBoardCollectionView!.dequeueReusableCell(withReuseIdentifier: ServiceCell.reuseIdentifier, for: indexPath) as! ServiceCell
         return cell
+    }
+    
+    
+    fileprivate func sectionHeaderSetup(_ indexPath: IndexPath) -> UICollectionReusableView {
+        if indexPath.section == 0 {
+            
+            let view = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HomeHeaderReusibleView.reuseIdentifier, for: indexPath) as! HomeHeaderReusibleView
+            
+            view.firstSectionLabel.text = Section(rawValue: indexPath.section)!.headers
+            view.rightButton.setImage(UIImage(named: Section(rawValue: indexPath.section)!.buttonImage), for: .normal)
+            
+            return view
+            
+        } else {
+            
+            
+            let view = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: SectionHeaderReusibleView.reuseIdentifier, for: indexPath) as! SectionHeaderReusibleView
+            
+            view.label.text = Section(rawValue: indexPath.section)!.headers
+            view.rightButton.setImage(UIImage(named: Section(rawValue: indexPath.section)!.buttonImage), for: .normal)
+            return view
+            
+        }
     }
     
 }
@@ -251,6 +269,27 @@ extension HomeViewController {
         collectionView.register(SectionHeaderReusibleView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: SectionHeaderReusibleView.reuseIdentifier)
         collectionView.register(HomeHeaderReusibleView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HomeHeaderReusibleView.reuseIdentifier)
     }
+}
+
+
+//MARK: - Display Logic
+extension HomeViewController: HomeDisplayLogic {
+    
+    
+    
+    // MARK: - Clean swift assembly
+        func cleanSwiftAssembly() {
+            let vc = self
+            let presenter = HomePresenter()
+            let interactor = HomeInteractor()
+            
+            vc.presenter = presenter
+            vc.interactor = interactor
+            interactor.presenter = presenter
+            presenter.vc = vc
+            
+        }
+    
 }
 
 
