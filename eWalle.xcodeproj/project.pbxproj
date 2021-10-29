@@ -26,6 +26,9 @@
 		D683A612272BF49300D79934 /* MenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D683A611272BF49300D79934 /* MenuModel.swift */; };
 		D683A614272C0A0300D79934 /* HomeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D683A613272C0A0300D79934 /* HomeInteractor.swift */; };
 		D683A616272C0A1800D79934 /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D683A615272C0A1800D79934 /* HomePresenter.swift */; };
+		D683A618272C2C5700D79934 /* LoginRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D683A617272C2C5700D79934 /* LoginRouter.swift */; };
+		D683A61A272C4C1300D79934 /* HomeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D683A619272C4C1300D79934 /* HomeRouter.swift */; };
+		D683A61C272C556200D79934 /* MenuRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D683A61B272C556200D79934 /* MenuRouter.swift */; };
 		D6B94518272AE55200692155 /* SectionHeaderReusibleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B94517272AE55200692155 /* SectionHeaderReusibleView.swift */; };
 		D6FC2C86272A84F600893A8B /* FriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6FC2C85272A84F600893A8B /* FriendCell.swift */; };
 		D6FC2C88272A853400893A8B /* BalanceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6FC2C87272A853400893A8B /* BalanceCell.swift */; };
@@ -54,6 +57,9 @@
 		D683A611272BF49300D79934 /* MenuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuModel.swift; sourceTree = "<group>"; };
 		D683A613272C0A0300D79934 /* HomeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeInteractor.swift; sourceTree = "<group>"; };
 		D683A615272C0A1800D79934 /* HomePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePresenter.swift; sourceTree = "<group>"; };
+		D683A617272C2C5700D79934 /* LoginRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRouter.swift; sourceTree = "<group>"; };
+		D683A619272C4C1300D79934 /* HomeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRouter.swift; sourceTree = "<group>"; };
+		D683A61B272C556200D79934 /* MenuRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuRouter.swift; sourceTree = "<group>"; };
 		D6B94517272AE55200692155 /* SectionHeaderReusibleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderReusibleView.swift; sourceTree = "<group>"; };
 		D6FC2C85272A84F600893A8B /* FriendCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendCell.swift; sourceTree = "<group>"; };
 		D6FC2C87272A853400893A8B /* BalanceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceCell.swift; sourceTree = "<group>"; };
@@ -125,6 +131,7 @@
 			isa = PBXGroup;
 			children = (
 				D63C0AB12729AC3600834842 /* LoginViewController.swift */,
+				D683A617272C2C5700D79934 /* LoginRouter.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -135,6 +142,7 @@
 				D683A613272C0A0300D79934 /* HomeInteractor.swift */,
 				D683A615272C0A1800D79934 /* HomePresenter.swift */,
 				D65A07C1272B1769005B93B4 /* HomeModel.swift */,
+				D683A619272C4C1300D79934 /* HomeRouter.swift */,
 				D63C0AC12729AD9E00834842 /* HomeViewController.swift */,
 				D6599B1C272B3D8E00F4F959 /* Views */,
 				D6599B1B272B3D5A00F4F959 /* Cells */,
@@ -150,6 +158,7 @@
 				D6599B17272B2FD300F4F959 /* MenuPresenter.swift */,
 				D6599B19272B342700F4F959 /* MenuInteractor.swift */,
 				D683A611272BF49300D79934 /* MenuModel.swift */,
+				D683A61B272C556200D79934 /* MenuRouter.swift */,
 			);
 			path = Menu;
 			sourceTree = "<group>";
@@ -255,12 +264,15 @@
 				D6FC2C88272A853400893A8B /* BalanceCell.swift in Sources */,
 				D6FC2C8A272A855A00893A8B /* ServiceCell.swift in Sources */,
 				D683A612272BF49300D79934 /* MenuModel.swift in Sources */,
+				D683A61C272C556200D79934 /* MenuRouter.swift in Sources */,
 				D65A07C2272B1769005B93B4 /* HomeModel.swift in Sources */,
+				D683A61A272C4C1300D79934 /* HomeRouter.swift in Sources */,
 				D63C0AC42729ADEC00834842 /* MenuViewController.swift in Sources */,
 				D62EE17D2729EC8100D15748 /* MenuCell.swift in Sources */,
 				D63C0AAE2729AC3600834842 /* AppDelegate.swift in Sources */,
 				D63C0AB02729AC3600834842 /* SceneDelegate.swift in Sources */,
 				D6B94518272AE55200692155 /* SectionHeaderReusibleView.swift in Sources */,
+				D683A618272C2C5700D79934 /* LoginRouter.swift in Sources */,
 				D63C0AC22729AD9E00834842 /* HomeViewController.swift in Sources */,
 				D683A616272C0A1800D79934 /* HomePresenter.swift in Sources */,
 				D6599B18272B2FD300F4F959 /* MenuPresenter.swift in Sources */,

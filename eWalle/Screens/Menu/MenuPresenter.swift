@@ -6,9 +6,12 @@
 //
 
 import Foundation
+import UIKit
 
 protocol MenuPresentationLogic: AnyObject {
     func presentMenuData(data: [AppScreen])
+    func presentSelectedVC(data: AppScreen?)
+    func updateScreensCash(data: [String : UIImage])
 }
 
 
@@ -20,6 +23,14 @@ class MenuPresenter {
 
 // MARK: - Presentation logic
 extension MenuPresenter: MenuPresentationLogic {
+    
+    func updateScreensCash(data: [String : UIImage]) {
+        viewController?.updateScreensCash(with: data)
+    }
+    
+    func presentSelectedVC(data: AppScreen?) {
+        viewController?.displayInitionState(with: data)
+    }
     
     func presentMenuData(data: [AppScreen]) {
         var titles: [String] = []

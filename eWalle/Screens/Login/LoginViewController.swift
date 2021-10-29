@@ -7,8 +7,14 @@
 
 import UIKit
 
+protocol LoginDisplayLogic: AnyObject{
+    func cleanSwiftAssembly()
+}
+
 class LoginViewController: UIViewController {
 
+    //MARK: - references
+    var router: LoginRouter?
     //MARK: - IBOutlets
     @IBOutlet weak var leftBarImage: UIImageView!
     
@@ -26,6 +32,8 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        cleanSwiftAssembly()
+        
         constraintsSetup()
         // Do any additional setup after loading the view.
     }
@@ -34,16 +42,12 @@ class LoginViewController: UIViewController {
     
     // signInButton pressed
     @IBAction func signInAction(_ sender: UIButton) {
-        
-        //Routing without router! Need to rewrite!
-        //self.show(HomeViewController(), sender: self)
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "HomeViewController")
-        self.present(vc, animated: true, completion: nil)
+        router?.navigateToHome()
     }
     
     // signUpButton pressed
     @IBAction func signUpAction(_ sender: UIButton) {
+        router?.navigateToHome()
     }
     
 
@@ -86,3 +90,13 @@ class LoginViewController: UIViewController {
     
 }
 
+
+//MARK: - Display Logic
+extension LoginViewController: LoginDisplayLogic {
+    func cleanSwiftAssembly() {
+        router = LoginRouter()
+        router?.vc = self
+    }
+    
+    
+}

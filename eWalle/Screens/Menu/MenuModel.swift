@@ -6,16 +6,17 @@
 //
 
 import Foundation
+import UIKit
 
 struct AppScreen {
     let id: Int?
     let title: String?
-    let snapshotPath: String?
+    let snapshot: UIImage?
     
-    init(withId id: Int? = nil, titled title: String? = nil, imagePath: String? = nil) {
+    init(withId id: Int? = nil, titled title: String? = nil, image: UIImage? = nil) {
         self.id = id
         self.title = title
-        self.snapshotPath = imagePath
+        self.snapshot = image
     }
 }
 

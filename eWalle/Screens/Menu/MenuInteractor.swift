@@ -6,16 +6,41 @@
 //
 
 import Foundation
+import UIKit
+
+protocol MenuDataStore: AnyObject {
+    var previous: AppScreen? { get set }
+    var vcSnapshots: [String : UIImage]? { get set }
+    
+    func fetchInitionState()
+    func fetchScreensCash()
+}
 
 protocol MenuBusinessLogic: AnyObject {
     func fetchMenuData()
 }
 
-class MenuInteractor {
+final class MenuInteractor: MenuDataStore {
+    
+    func fetchScreensCash() {
+        presenter?.updateScreensCash(data: vcSnapshots!)
+    }
+    
+    func fetchInitionState() {
+        
+        presenter?.presentSelectedVC(data: previous)
+    }
+    
+    
+    //MARK: - Data store
+    var previous: AppScreen? = nil
+    var vcSnapshots: [String : UIImage]? = [:]
+    
     var presenter: MenuPresentationLogic?
     
     //MARK: Screens data placeholder
     var placeholder: [AppScreen] = []
+    
 }
 
 // MARK: - Business logic
@@ -35,3 +60,4 @@ extension MenuInteractor: MenuBusinessLogic {
     
     
 }
+

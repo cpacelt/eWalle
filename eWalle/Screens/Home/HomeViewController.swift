@@ -7,6 +7,7 @@
 
 import UIKit
 
+
 protocol HomeDisplayLogic: AnyObject {
     func displayAccount(with data: [Account])
     func displayFriends(with data: [Person])
@@ -16,11 +17,12 @@ protocol HomeDisplayLogic: AnyObject {
     func cleanSwiftAssembly()
 }
 
-class HomeViewController: UICollectionViewController{
+final class HomeViewController: UICollectionViewController{
     
     //MARK: - Presenter reference
     var interactor: HomeBusinessLogic?
     var presenter: HomePresentationLogic?
+    var router: HomeRoutingLogic?
     
     private var storyBoardCollectionView: UICollectionView?
     
@@ -28,111 +30,89 @@ class HomeViewController: UICollectionViewController{
     var friendsCash: [Person] = []
     var accountCash: [Account] = []
     var servicesCash: [Service] = []
-    
     var sectionsCash: [Section] = []
     
     
-    // MARK: - Collection view layout
-    enum SectionS: Int, CaseIterable {
-        case balance
-        case friends
-        case services
+    // MARK: - Balance section layout
+    
+    static var balanceLayout: NSCollectionLayoutSection {
         
-        var cellIdentifier: String {
-            switch self {
-            case .balance: return BalanceCell.reuseIdentifier
-            case .friends: return FriendCell.reuseIdentifier
-            case .services: return ServiceCell.reuseIdentifier
-            }
-        }
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        item.contentInsets = .init(top: 2, leading: 10, bottom: 2, trailing: 10)
         
-        var layout: NSCollectionLayoutSection {
-            switch self {
-            case .balance: return balanceLayout
-            case .friends: return friendsLayout
-            case .services: return servicesLayout
-            }
-            
-        }
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.2))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1/*columns*/)
         
+        let footerHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(100.0))
+        let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: footerHeaderSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
         
-        // MARK: - Balance section layout
-        
-        var balanceLayout: NSCollectionLayoutSection {
-            
-            let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
-            let item = NSCollectionLayoutItem(layoutSize: itemSize)
-            item.contentInsets = .init(top: 2, leading: 10, bottom: 2, trailing: 10)
-            
-            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.2))
-            let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1/*columns*/)
-            
-            let footerHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(100.0))
-            let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: footerHeaderSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
-            
-            let section = NSCollectionLayoutSection(group: group)
-            section.boundarySupplementaryItems = [header]
-            section.contentInsets = .init(top: 20, leading: 20, bottom: 20, trailing: 20)
-            return section
-        }
-        
-        
-        
-        // MARK: - Friends section layout
-        
-        var friendsLayout: NSCollectionLayoutSection {
-            
-            let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
-            let item = NSCollectionLayoutItem(layoutSize: itemSize)
-            item.contentInsets = .init(top: 5, leading: 5, bottom: 5, trailing: 5)
-            
-            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.3), heightDimension: .fractionalWidth(0.4))
-            let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1/*columns*/)
-            
-            let footerHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(50.0))
-            let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: footerHeaderSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
-            
-            let section = NSCollectionLayoutSection(group: group)
-            section.orthogonalScrollingBehavior = .continuous
-            section.boundarySupplementaryItems = [header]
-            section.contentInsets = .init(top: 0, leading: 20, bottom: 20, trailing: 20)
-            return section
-        }
-        
-        
-        // MARK: - Services section layout
-        
-        var servicesLayout: NSCollectionLayoutSection {
-            
-            let itemSize = NSCollectionLayoutSize(widthDimension: .absolute(20), heightDimension: .absolute(80))
-            let item = NSCollectionLayoutItem(layoutSize: itemSize)
-            item.contentInsets = .init(top: 2, leading: 2, bottom: 2, trailing: 2)
-            
-            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalWidth(0.3))
-            let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 4/*columns*/)
-            
-            let footerHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(50.0))
-            let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: footerHeaderSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
-            
-            let section = NSCollectionLayoutSection(group: group)
-            section.boundarySupplementaryItems = [header]
-            section.contentInsets = .init(top: 10, leading: 20, bottom: 10, trailing: 20)
-            return section
-        }
-        
+        let section = NSCollectionLayoutSection(group: group)
+        section.boundarySupplementaryItems = [header]
+        section.contentInsets = .init(top: 20, leading: 20, bottom: 20, trailing: 20)
+        return section
     }
+    
+    // MARK: - Friends section layout
+    
+    static var friendsLayout: NSCollectionLayoutSection {
+        
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        item.contentInsets = .init(top: 5, leading: 5, bottom: 5, trailing: 5)
+        
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.3), heightDimension: .fractionalWidth(0.4))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1/*columns*/)
+        
+        let footerHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(50.0))
+        let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: footerHeaderSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
+        
+        let section = NSCollectionLayoutSection(group: group)
+        section.orthogonalScrollingBehavior = .continuous
+        section.boundarySupplementaryItems = [header]
+        section.contentInsets = .init(top: 0, leading: 20, bottom: 20, trailing: 20)
+        return section
+    }
+    
+    
+    // MARK: - Services section layout
+    
+    static var servicesLayout: NSCollectionLayoutSection {
+        
+        let itemSize = NSCollectionLayoutSize(widthDimension: .absolute(20), heightDimension: .absolute(80))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        item.contentInsets = .init(top: 2, leading: 2, bottom: 2, trailing: 2)
+        
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalWidth(0.3))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 4/*columns*/)
+        
+        let footerHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(50.0))
+        let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: footerHeaderSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
+        
+        let section = NSCollectionLayoutSection(group: group)
+        section.boundarySupplementaryItems = [header]
+        section.contentInsets = .init(top: 10, leading: 20, bottom: 10, trailing: 20)
+        return section
+    }
+    
+    
     
     
     // MARK: - Set layout for section
     let layout: UICollectionViewCompositionalLayout = {
         let layout = UICollectionViewCompositionalLayout { (sectionIndex, layoutEnvironment) -> NSCollectionLayoutSection? in
-            guard let sectionKind = SectionS(rawValue: sectionIndex) else { return nil }
-            return sectionKind.layout
+            
+            let sectionKind = Section.SectionKind(rawValue: sectionIndex)
+            
+            switch sectionKind{
+            case .balance: return balanceLayout
+            case .friends: return friendsLayout
+            case .services: return servicesLayout
+            case .none: return nil
+            }
         }
         return layout
     }()
-    
-    
     
     //MARK: - Inits
     // Comment if Storyboard
@@ -172,20 +152,20 @@ extension HomeViewController {
         
         let sectionKind = sectionsCash[section].kind
         switch sectionKind {
-            case .friends: return friendsCash.count
-            case .balance: return accountCash.count
-            case .services: return servicesCash.count
+        case .friends: return friendsCash.count
+        case .balance: return accountCash.count
+        case .services: return servicesCash.count
         }
         
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-
+        
         let sectionKind = sectionsCash[indexPath.section].kind
         switch sectionKind {
-            case .friends: return friendCellSetup(for: indexPath)
-            case .balance: return balanceCellSetup(for: indexPath)
-            case .services: return servicesCellSetup(for: indexPath)
+        case .friends: return friendCellSetup(for: indexPath)
+        case .balance: return balanceCellSetup(for: indexPath)
+        case .services: return servicesCellSetup(for: indexPath)
         }
         
     }
@@ -200,7 +180,9 @@ extension HomeViewController {
 
 // MARK: CollectionView Delegate
 extension HomeViewController {
-    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        router?.navigateToMenu(from: AppScreen(titled: "Home", image: view.snapshot))
+    }
     
 }
 
@@ -209,13 +191,15 @@ extension HomeViewController {
 extension HomeViewController {
     
     fileprivate func friendCellSetup(for indexPath: IndexPath) -> UICollectionViewCell {
-
+        
+        
+        
         if indexPath.row == 0 {
             let cell = storyBoardCollectionView!.dequeueReusableCell(withReuseIdentifier: AddFriendCell.reuseIdentifier, for: indexPath)
             return cell
         } else {
             let cell = storyBoardCollectionView!.dequeueReusableCell(withReuseIdentifier: FriendCell.reuseIdentifier, for: indexPath) as! FriendCell
-            cell.configureWith(person: friendsCash[indexPath.row - 1])
+            cell.configureWith(person: self.friendsCash[indexPath.row - 1])
             return cell
         }
         
@@ -295,17 +279,19 @@ extension HomeViewController: HomeDisplayLogic {
     }
     
     
-    
     // MARK: - Clean swift assembly
     func cleanSwiftAssembly() {
         let vc = self
         let presenter = HomePresenter()
         let interactor = HomeInteractor()
+        let router = HomeRouter()
         
+        vc.router = router
         vc.presenter = presenter
         vc.interactor = interactor
         interactor.presenter = presenter
         presenter.vc = vc
+        router.vc = vc
         
     }
     

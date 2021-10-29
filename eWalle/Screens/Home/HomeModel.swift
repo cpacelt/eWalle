@@ -31,10 +31,10 @@ struct Section {
     let kind: SectionKind
     
     enum SectionKind: Int {
+        // WARN: - You shouldn't change the direction
         case balance
         case friends
         case services
     }
-    
     
 }

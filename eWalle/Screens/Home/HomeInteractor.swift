@@ -33,7 +33,7 @@ extension HomeInteractor: HomeBusinessLogic {
         let f3 = Person(firstName: "Paul", secondNane: "Layn", avatarImagePath: "avatar1")
         let f4 = Person(firstName: "Michael", secondNane: "Petrov", avatarImagePath: "avatar1")
         
-        var friendsPlaceholder: [Person] = [f1, f2, f3, f4]
+        let friendsPlaceholder: [Person] = [f1, f2, f3, f4, f1, f2, f3, f4]
         
         presenter?.presentFriends(with: friendsPlaceholder)
     }
