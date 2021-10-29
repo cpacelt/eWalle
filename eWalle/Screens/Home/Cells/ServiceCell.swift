@@ -23,7 +23,7 @@ class ServiceCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-
+        
         prepareToShow()
         setupConstraints()
     }
@@ -40,7 +40,7 @@ class ServiceCell: UICollectionViewCell {
     
     //MARK: - Constraints setup
     func setupConstraints() {
-      
+        
         cellStackView.translatesAutoresizingMaskIntoConstraints = false
         serviceImageView.translatesAutoresizingMaskIntoConstraints = false
         imageBackgroundView.translatesAutoresizingMaskIntoConstraints = false
@@ -52,14 +52,18 @@ class ServiceCell: UICollectionViewCell {
         serviceImageView.centerXAnchor.constraint(equalTo: imageBackgroundView.centerXAnchor).isActive = true
         serviceImageView.centerYAnchor.constraint(equalTo: imageBackgroundView.centerYAnchor).isActive = true
         
-
+        
         
         cellStackView.leftAnchor.constraint(equalTo: contentView.leftAnchor).isActive = true
         cellStackView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
         cellStackView.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive = true
-       // cellStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        // cellStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
         
     }
     
+    func configure(with service: Service) {
+        self.serviceTitleLabel.text = service.title
+        self.serviceImageView.image = UIImage(named: service.logoImagePath)
+    }
     
 }

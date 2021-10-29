@@ -7,6 +7,10 @@
 
 import Foundation
 
+struct Account {
+    let me: Person
+    let sum: Int
+}
 
 struct Person {
     let firstName: String
@@ -20,7 +24,14 @@ struct Service {
     let logoImagePath: String
 }
 
-struct Account {
-    let me: Person
-    let sum: Int
+struct Section {
+    let title: String
+    let rightButtonImagePath: String
+    let kind: SectionKind
+    
+    enum SectionKind: Int {
+        case balance
+        case friends
+        case services
+    }
 }

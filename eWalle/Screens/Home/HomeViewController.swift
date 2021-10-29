@@ -8,43 +8,41 @@
 import UIKit
 
 protocol HomeDisplayLogic: AnyObject {
+    func displayAccount(with data: [Account])
+    func displayFriends(with data: [Person])
+    func displayServices(with data: [Service])
+    func displaySections(with data: [Section])
+    
     func cleanSwiftAssembly()
 }
 
 class HomeViewController: UICollectionViewController{
     
+    //MARK: - Presenter reference
     var interactor: HomeBusinessLogic?
     var presenter: HomePresentationLogic?
     
     private var storyBoardCollectionView: UICollectionView?
     
+    // MARK: - Data cash
+    var friendsCash: [Person] = []
+    var accountCash: [Account] = []
+    var servicesCash: [Service] = []
+    
+    var sectionsCash: [Section] = []
+    
+    
     // MARK: - Collection view layout
-    enum Section: Int, CaseIterable {
+    enum SectionS: Int, CaseIterable {
         case balance
         case friends
         case services
-        
-        var cellsCount: Int{
-            switch self {
-            case .balance: return 1
-            case .friends: return 5
-            case .services: return 8
-            }
-        }
         
         var cellIdentifier: String {
             switch self {
             case .balance: return BalanceCell.reuseIdentifier
             case .friends: return FriendCell.reuseIdentifier
             case .services: return ServiceCell.reuseIdentifier
-            }
-        }
-        
-        var headers: String{
-            switch self {
-            case .balance: return "Account overview"
-            case .friends: return "Send Money"
-            case .services: return "Services"
             }
         }
         
@@ -55,14 +53,6 @@ class HomeViewController: UICollectionViewController{
             case .services: return servicesLayout
             }
             
-        }
-        
-        var buttonImage: String{
-            switch self {
-            case .balance: return "homeHeaderButton"
-            case .friends: return "friendsHeaderButton"
-            case .services: return "servicesHeaderButton"
-            }
         }
         
         
@@ -136,7 +126,7 @@ class HomeViewController: UICollectionViewController{
     // MARK: - Set layout for section
     let layout: UICollectionViewCompositionalLayout = {
         let layout = UICollectionViewCompositionalLayout { (sectionIndex, layoutEnvironment) -> NSCollectionLayoutSection? in
-            guard let sectionKind = Section(rawValue: sectionIndex) else { return nil }
+            guard let sectionKind = SectionS(rawValue: sectionIndex) else { return nil }
             return sectionKind.layout
         }
         return layout
@@ -162,6 +152,10 @@ class HomeViewController: UICollectionViewController{
         
         cleanSwiftAssembly()
         collectionViewSetup()
+        interactor?.getAccount()
+        interactor?.getFriends()
+        interactor?.getServices()
+        interactor?.getSections()
         
     }
     
@@ -172,16 +166,26 @@ class HomeViewController: UICollectionViewController{
 extension HomeViewController {
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return Section.allCases.count
+        return sectionsCash.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return Section(rawValue: section)!.cellsCount
+        
+        // guard let sectionKind = Section(rawValue: section) else { return 0 }
+        
+        let sectionKind = sectionsCash[section].kind
+        
+        switch sectionKind {
+        case .friends: return friendsCash.count
+        case .balance: return accountCash.count
+        case .services: return servicesCash.count
+        }
+        
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        guard let sectionKind = Section(rawValue: indexPath.section) else { return UICollectionViewCell() }
+        guard let sectionKind = SectionS(rawValue: indexPath.section) else { return UICollectionViewCell() }
         
         switch sectionKind {
         case .friends: return friendCellSetup(for: indexPath)
@@ -193,7 +197,7 @@ extension HomeViewController {
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
-        return sectionHeaderSetup(indexPath)
+        return makeSectionHeader(for: indexPath)
         
     }
     
@@ -211,49 +215,52 @@ extension HomeViewController {
 extension HomeViewController {
     
     fileprivate func friendCellSetup(for indexPath: IndexPath) -> UICollectionViewCell {
-        let cell: UICollectionViewCell
+        //let cell: UICollectionViewCell
         
         if indexPath.row == 0 {
-            cell = storyBoardCollectionView!.dequeueReusableCell(withReuseIdentifier: AddFriendCell.reuseIdentifier, for: indexPath)
+            let cell = storyBoardCollectionView!.dequeueReusableCell(withReuseIdentifier: AddFriendCell.reuseIdentifier, for: indexPath)
+            return cell
         } else {
-            cell = storyBoardCollectionView!.dequeueReusableCell(withReuseIdentifier: FriendCell.reuseIdentifier, for: indexPath) as! FriendCell
+            let cell = storyBoardCollectionView!.dequeueReusableCell(withReuseIdentifier: FriendCell.reuseIdentifier, for: indexPath) as! FriendCell
+            cell.configureWith(person: friendsCash[indexPath.row - 1])
+            return cell
         }
         
-        return cell
     }
-    
     
     
     fileprivate func balanceCellSetup(for indexPath: IndexPath) -> BalanceCell {
         let cell = storyBoardCollectionView!.dequeueReusableCell(withReuseIdentifier: BalanceCell.reuseIdentifier, for: indexPath) as! BalanceCell
+        
+        cell.balanceLabel.text = String(accountCash[indexPath.row].sum)
+        
         return cell
     }
-    
     
     
     fileprivate func servicesCellSetup(for indexPath: IndexPath) -> ServiceCell {
         let cell = storyBoardCollectionView!.dequeueReusableCell(withReuseIdentifier: ServiceCell.reuseIdentifier, for: indexPath) as! ServiceCell
+        cell.configure(with: servicesCash[indexPath.row])
         return cell
     }
     
     
-    fileprivate func sectionHeaderSetup(_ indexPath: IndexPath) -> UICollectionReusableView {
+    fileprivate func makeSectionHeader(for indexPath: IndexPath) -> UICollectionReusableView {
         if indexPath.section == 0 {
             
             let view = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HomeHeaderReusibleView.reuseIdentifier, for: indexPath) as! HomeHeaderReusibleView
             
-            view.firstSectionLabel.text = Section(rawValue: indexPath.section)!.headers
-            view.rightButton.setImage(UIImage(named: Section(rawValue: indexPath.section)!.buttonImage), for: .normal)
+            view.firstSectionLabel.text = sectionsCash[indexPath.section].title
+            view.rightButton.setImage(UIImage(named: sectionsCash[indexPath.section].rightButtonImagePath), for: .normal)
             
             return view
             
         } else {
             
-            
             let view = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: SectionHeaderReusibleView.reuseIdentifier, for: indexPath) as! SectionHeaderReusibleView
             
-            view.label.text = Section(rawValue: indexPath.section)!.headers
-            view.rightButton.setImage(UIImage(named: Section(rawValue: indexPath.section)!.buttonImage), for: .normal)
+            view.label.text = sectionsCash[indexPath.section].title
+            view.rightButton.setImage(UIImage(named: sectionsCash[indexPath.section].rightButtonImagePath), for: .normal)
             return view
             
         }
@@ -274,21 +281,40 @@ extension HomeViewController {
 
 //MARK: - Display Logic
 extension HomeViewController: HomeDisplayLogic {
+    func displaySections(with data: [Section]) {
+        sectionsCash = data
+        collectionView.reloadData()
+    }
+    
+    func displayAccount(with data: [Account]) {
+        accountCash = data
+        collectionView.reloadData()
+    }
+    
+    func displayFriends(with data: [Person]) {
+        friendsCash = data
+        collectionView.reloadData()
+    }
+    
+    func displayServices(with data: [Service]) {
+        servicesCash = data
+        collectionView.reloadData()
+    }
     
     
     
     // MARK: - Clean swift assembly
-        func cleanSwiftAssembly() {
-            let vc = self
-            let presenter = HomePresenter()
-            let interactor = HomeInteractor()
-            
-            vc.presenter = presenter
-            vc.interactor = interactor
-            interactor.presenter = presenter
-            presenter.vc = vc
-            
-        }
+    func cleanSwiftAssembly() {
+        let vc = self
+        let presenter = HomePresenter()
+        let interactor = HomeInteractor()
+        
+        vc.presenter = presenter
+        vc.interactor = interactor
+        interactor.presenter = presenter
+        presenter.vc = vc
+        
+    }
     
 }
 

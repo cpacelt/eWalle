@@ -54,4 +54,10 @@ class FriendCell: UICollectionViewCell {
         cellStackView.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive = true
         cellStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20).isActive = true
     }
+    
+    //MARK: - Cinfigure with Person
+    func configureWith(person: Person) {
+        self.nameLabel.text = person.firstName
+        self.avatarImageView.image = UIImage(named: person.avatarImagePath)
+    }
 }
