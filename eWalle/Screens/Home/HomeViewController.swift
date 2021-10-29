@@ -156,7 +156,6 @@ class HomeViewController: UICollectionViewController{
         interactor?.getFriends()
         interactor?.getServices()
         interactor?.getSections()
-        
     }
     
 }
@@ -171,26 +170,22 @@ extension HomeViewController {
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        // guard let sectionKind = Section(rawValue: section) else { return 0 }
-        
         let sectionKind = sectionsCash[section].kind
-        
         switch sectionKind {
-        case .friends: return friendsCash.count
-        case .balance: return accountCash.count
-        case .services: return servicesCash.count
+            case .friends: return friendsCash.count
+            case .balance: return accountCash.count
+            case .services: return servicesCash.count
         }
         
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        guard let sectionKind = SectionS(rawValue: indexPath.section) else { return UICollectionViewCell() }
-        
+
+        let sectionKind = sectionsCash[indexPath.section].kind
         switch sectionKind {
-        case .friends: return friendCellSetup(for: indexPath)
-        case .balance: return balanceCellSetup(for: indexPath)
-        case .services: return servicesCellSetup(for: indexPath)
+            case .friends: return friendCellSetup(for: indexPath)
+            case .balance: return balanceCellSetup(for: indexPath)
+            case .services: return servicesCellSetup(for: indexPath)
         }
         
     }
@@ -198,7 +193,6 @@ extension HomeViewController {
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
         return makeSectionHeader(for: indexPath)
-        
     }
     
 }
@@ -215,8 +209,7 @@ extension HomeViewController {
 extension HomeViewController {
     
     fileprivate func friendCellSetup(for indexPath: IndexPath) -> UICollectionViewCell {
-        //let cell: UICollectionViewCell
-        
+
         if indexPath.row == 0 {
             let cell = storyBoardCollectionView!.dequeueReusableCell(withReuseIdentifier: AddFriendCell.reuseIdentifier, for: indexPath)
             return cell

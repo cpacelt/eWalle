@@ -92,14 +92,13 @@ final class HomeHeaderReusibleView: UICollectionReusableView {
         viewStackView.translatesAutoresizingMaskIntoConstraints = false
         rightButton.translatesAutoresizingMaskIntoConstraints = false
         
-        
         viewStackView.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
         viewStackView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         viewStackView.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
         viewStackView.heightAnchor.constraint(equalTo: self.heightAnchor).isActive = true
         
         rightButton.topAnchor.constraint(equalTo: self.topAnchor, constant: 20).isActive = true
-        rightButton.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -10).isActive = true
+        rightButton.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
     }
 }
 

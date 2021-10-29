@@ -25,6 +25,7 @@ struct Service {
 }
 
 struct Section {
+    
     let title: String
     let rightButtonImagePath: String
     let kind: SectionKind
@@ -34,4 +35,6 @@ struct Section {
         case friends
         case services
     }
+    
+    
 }
