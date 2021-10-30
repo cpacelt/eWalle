@@ -9,11 +9,9 @@ import Foundation
 import UIKit
 
 protocol MenuPresentationLogic: AnyObject {
-    func presentMenuData(data: [AppScreen])
-    func presentSelectedVC(data: AppScreen?)
+    func presentSelectedVC(data: UIViewController?)
     func updateScreensCash(data: [String : UIImage])
 }
-
 
 class MenuPresenter {
     //MARK: - VC reference
@@ -28,15 +26,8 @@ extension MenuPresenter: MenuPresentationLogic {
         viewController?.updateScreensCash(with: data)
     }
     
-    func presentSelectedVC(data: AppScreen?) {
+    func presentSelectedVC(data: UIViewController?) {
         viewController?.displayInitionState(with: data)
     }
-    
-    func presentMenuData(data: [AppScreen]) {
-        var titles: [String] = []
-        data.forEach { titles.append($0.title ?? "") }
-        viewController?.displayMenu(with: titles)
-    }
-    
     
 }

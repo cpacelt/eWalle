@@ -26,16 +26,13 @@ class MenuRouter: MenuDataPassing {
 
 extension MenuRouter: MenuRoutingLogic {
     func navigateToLogin() {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let login = storyboard.instantiateViewController(withIdentifier: "LoginViewController")
-        vc?.present(login, animated: true, completion: nil)
-        
+        guard let me = vc as? ContainerViewController else { return }
+        me.switchToVC(titled: "Login")
     }
     
     func navigateToHome() {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let home = storyboard.instantiateViewController(withIdentifier: "HomeViewController")
-        vc?.present(home, animated: true, completion: nil)
+        guard let me = vc as? ContainerViewController else { return }
+        me.switchToVC(titled: "Home")
     }
     
     

@@ -10,22 +10,35 @@ import UIKit
 
 protocol LoginRoutingLogic: AnyObject {
     func navigateToHome()
-    
+    func passSnapshot()
 }
+
+
 
 class LoginRouter {
     weak var vc: UIViewController?
 }
 
 extension LoginRouter: LoginRoutingLogic {
-    
-    func navigateToHome() {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let home = storyboard.instantiateViewController(withIdentifier: "HomeViewController")
+    func passSnapshot() {
+        guard let menu = vc?.presentingViewController as? MenuViewController else { return }
         
-        vc?.modalPresentationStyle = .overFullScreen
-        vc?.present(home, animated: true, completion: nil)
+        DispatchQueue.main.async {
+            menu.router?.dataStorage?.vcSnapshots?[self.vc?.title ?? ""] = self.vc?.view.snapshot
+        }
         
     }
-
+    
+    func navigateToHome() {
+        
+        // Parent is MenuVC
+        guard let menu = vc?.presentingViewController as? MenuViewController else { return }
+        
+        menu.router?.dataStorage?.previous = self.vc
+        // menu.router?.dataStorage?.vcSnapshots?[self.vc?.title ?? ""] = self.vc?.view.snapshot
+        
+        vc?.dismiss(animated: true, completion: nil)
+        
+    }
+    
 }

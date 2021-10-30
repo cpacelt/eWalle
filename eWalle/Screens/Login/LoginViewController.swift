@@ -12,6 +12,8 @@ protocol LoginDisplayLogic: AnyObject{
 }
 
 class LoginViewController: UIViewController {
+    var container: ViewControllersCustomContainer? = nil
+    
 
     //MARK: - references
     var router: LoginRouter?
@@ -35,11 +37,15 @@ class LoginViewController: UIViewController {
         self.modalPresentationStyle = .fullScreen
         
         cleanSwiftAssembly()
-        
+
         constraintsSetup()
         // Do any additional setup after loading the view.
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        router?.passSnapshot()
+    }
     //MARK: - IBActions
     
     // signInButton pressed

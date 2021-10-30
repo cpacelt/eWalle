@@ -16,7 +16,9 @@ protocol HomeDisplayLogic: AnyObject {
     func cleanSwiftAssembly()
 }
 
-final class HomeViewController: UICollectionViewController{
+final class HomeViewController: UICollectionViewController {
+    var container: ViewControllersCustomContainer?
+    
     
     // MARK: - Presenter reference
     var interactor: HomeBusinessLogic?
@@ -135,6 +137,12 @@ final class HomeViewController: UICollectionViewController{
         interactor?.getSections()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        router?.passSnapshot()
+    }
+    
 }
 
 // MARK: CollectionView DataSource
@@ -182,9 +190,10 @@ extension HomeViewController {
     
 }
 
+// Home Header delegate
 extension HomeViewController: HomeHeaderReusibleViewDelegate {
     func homeHeaderReusibleView(didTappedRightButton button: UIButton) {
-        router?.navigateToMenu(from: AppScreen(titled: "Home", image: view.snapshot))
+        router?.navigateToMenu()
     }
     
 }

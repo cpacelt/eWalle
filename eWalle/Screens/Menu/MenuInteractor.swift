@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 protocol MenuDataStore: AnyObject {
-    var previous: AppScreen? { get set }
+    var previous: UIViewController? { get set }
     var vcSnapshots: [String : UIImage]? { get set }
     
     func fetchInitionState()
@@ -17,7 +17,7 @@ protocol MenuDataStore: AnyObject {
 }
 
 protocol MenuBusinessLogic: AnyObject {
-    func fetchMenuData()
+    
 }
 
 final class MenuInteractor: MenuDataStore {
@@ -27,36 +27,20 @@ final class MenuInteractor: MenuDataStore {
     }
     
     func fetchInitionState() {
-        
         presenter?.presentSelectedVC(data: previous)
     }
     
     
     //MARK: - Data store
-    var previous: AppScreen? = nil
+    weak var previous: UIViewController? = nil
     var vcSnapshots: [String : UIImage]? = [:]
     
     var presenter: MenuPresentationLogic?
-    
-    //MARK: Screens data placeholder
-    var placeholder: [AppScreen] = []
     
 }
 
 // MARK: - Business logic
 extension MenuInteractor: MenuBusinessLogic {
-    
-    //Fetch titles for menu
-    func fetchMenuData() {
-        
-        let homeScreen = AppScreen(titled: "Home")
-        let friendsScreen = AppScreen(titled: "Friends")
-        let loginScreen = AppScreen(titled: "Login")
-        
-        placeholder = [homeScreen, friendsScreen, loginScreen]
-        // Put code here...
-        presenter?.presentMenuData(data: placeholder)
-    }
     
     
 }

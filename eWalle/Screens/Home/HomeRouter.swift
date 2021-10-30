@@ -9,7 +9,8 @@ import Foundation
 import UIKit
 
 protocol HomeRoutingLogic: AnyObject {
-    func navigateToMenu(from screen: AppScreen)
+    func navigateToMenu()
+    func passSnapshot()
     
 }
 
@@ -18,20 +19,19 @@ class HomeRouter {
 }
 
 extension HomeRouter: HomeRoutingLogic {
-    func navigateToMenu(from screen: AppScreen) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let menu = storyboard.instantiateViewController(withIdentifier: "MenuViewController") as! MenuViewController
-        
-        vc?.present(menu, animated: true, completion: nil)
+    func passSnapshot() {
+        // Parent is MenuVC
+        guard let menu = vc?.presentingViewController as? MenuViewController else { return }
+        menu.router?.dataStorage?.vcSnapshots?[vc?.title ?? ""] = vc?.view.snapshot
+    }
+    
+    
+    func navigateToMenu() {
+        // Parent is MenuVC
+        guard let menu = vc?.presentingViewController as? MenuViewController else { return }
+        menu.router?.dataStorage?.previous = vc
+        vc?.dismiss(animated: true, completion: nil)
 
-        //Self snapshot
-        menu.router?.dataStorage?.vcSnapshots?[screen.title ?? ""] = screen.snapshot
-        menu.router?.dataStorage?.previous = screen
-
-        // Login snapshot
-        menu.router?.dataStorage?.vcSnapshots?["Login"] = UIImage(named: "loginScreen")
-        
-        
     }
 
 }

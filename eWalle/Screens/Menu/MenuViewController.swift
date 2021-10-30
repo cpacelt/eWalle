@@ -7,24 +7,23 @@
 
 import UIKit
 
+
 protocol MenuDisplayLogic: AnyObject {
     func updateScreensCash(with data: [String : UIImage])
-    func displayMenu(with data: [String])
-    func displayInitionState(with data: AppScreen?)
+    func displayInitionState(with data: UIViewController?)
     func cleanSwiftAssembly()
 }
 
-class MenuViewController: UIViewController {
+final class MenuViewController: ContainerViewController {
     //MARK: - Presenter reference
     var presenter: MenuPresentationLogic?
     var interactor: (MenuBusinessLogic & MenuDataStore)?
     var router: (MenuRoutingLogic & MenuDataPassing)?
     
     // MARK: - Data cash
-    var menuTitlesCash = [String]()
-    
     var screensCash = [String : UIImage]()
-    var selectedRow: Int = 0
+
+    var isLogin = false
     
     //MARK: - IBOutlets
     @IBOutlet weak var accountBackgroundRoundedView: UIView!
@@ -62,8 +61,12 @@ class MenuViewController: UIViewController {
         super.viewDidLoad()
         
         
-        self.modalPresentationStyle = .fullScreen
-        self.modalTransitionStyle = .crossDissolve
+        //Child view controllers creation
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let home = storyboard.instantiateViewController(withIdentifier: "HomeViewController")
+        let login = storyboard.instantiateViewController(withIdentifier: "LoginViewController")
+        let stack = [login, home]
+        self.add(stack)
         
         // Do any additional setup after loading the view.
         prepareSubviews()
@@ -71,16 +74,26 @@ class MenuViewController: UIViewController {
         
         // Asembling...
         cleanSwiftAssembly()
-        interactor?.fetchMenuData()
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        
+        
         interactor?.fetchScreensCash()
         interactor?.fetchInitionState()
         
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if !isLogin {
+            router?.navigateToLogin()
+            isLogin = !isLogin
+        }
     }
     
     
@@ -121,24 +134,16 @@ class MenuViewController: UIViewController {
         DispatchQueue.main.async {
             
             UIView.transition(with: self.selectedVCImageView, duration: 0.4, options: .transitionCrossDissolve , animations: {
-                self.selectedVCImageView.image = self.screensCash[self.menuTitlesCash[indexPath.row]]
+                self.selectedVCImageView.image = self.screensCash[self.controllers[indexPath.row].title!]
                     }, completion: nil)
-            
-            
-            
+        
         }
     }
     
     //MARK: - Actions
     
     @IBAction func menuCloseButtonAction(_ sender: UIButton) {
-        switch selectedRow {
-        case 0: router?.navigateToHome()
-        case 1: router?.navigateToLogin()
-        case 2: router?.navigateToLogin()
-        default: return
-        }
-        
+        self.switchToSelected()
     }
     
     @IBAction func logoutButtonAction(_ sender: UIButton) {
@@ -170,7 +175,8 @@ class MenuViewController: UIViewController {
 extension MenuViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return menuTitlesCash.count
+        return self.controllers.count
+        //return menuTitlesCash.count
     }
     
 }
@@ -180,7 +186,8 @@ extension MenuViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = menuTableView.dequeueReusableCell(withIdentifier: MenuCell.reuseIdentifier) as! MenuCell
         
-        cell.cellLabel.text = menuTitlesCash[indexPath.row]
+        cell.cellLabel.text = controllers[indexPath.row].title
+        //cell.cellLabel.text = menuTitlesCash[indexPath.row]
         cell.cellLabel.sizeToFit()
         
         return cell
@@ -188,7 +195,8 @@ extension MenuViewController: UITableViewDelegate {
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectedRow = indexPath.row
+       // selectedRow = indexPath.row
+        self.selectAt(indexPath.row)
         switchSelectedVCImageView(for: indexPath)
     }
     
@@ -202,20 +210,21 @@ extension MenuViewController: MenuDisplayLogic {
         self.screensCash = data
     }
     
-    func displayInitionState(with data: AppScreen?) {
-        
-        let index = menuTitlesCash.firstIndex(of: data?.title ?? "")
+    func displayInitionState(with data: UIViewController?) {
+        guard let previousVC = data else { return }
+        let index = controllers.firstIndex(of: previousVC)
         self.menuTableView.selectRow(at: IndexPath(row: index ?? 0, section: 0), animated: false, scrollPosition: .none)
+        
+        self.selectedVCImageView.image = screensCash[previousVC.title!]
+        
+    }
 
-        self.selectedVCImageView.image = screensCash[data?.title ?? ""]
-        
-    }
-    
-    func displayMenu(with data: [String]) {
-        self.menuTitlesCash = data
-        menuTableView.reloadData()
-        
-    }
+//    DEPRECATED
+//    func displayMenu(with data: [String]) {
+//        self.menuTitlesCash = data
+//        menuTableView.reloadData()
+//
+//    }
     
     
     // MARK: - Clean swift assembly
@@ -239,10 +248,12 @@ extension MenuViewController: MenuDisplayLogic {
 
 // MARK: Take screenshot
 extension UIView {
+    
     var snapshot: UIImage {
         return UIGraphicsImageRenderer(size: self.bounds.size).image { _ in
             self.drawHierarchy(in: self.bounds, afterScreenUpdates: true)
         }
-        
     }
+    
+    
 }
