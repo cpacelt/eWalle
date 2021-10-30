@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol HomeHeaderReusibleViewDelegate: AnyObject {
+    func homeHeaderReusibleView(didTappedRightButton button: UIButton)
+}
+
 final class HomeHeaderReusibleView: UICollectionReusableView {
     
     //MARK: - Reuse identifier
@@ -15,6 +19,7 @@ final class HomeHeaderReusibleView: UICollectionReusableView {
     
     
     //MARK: - Subviews
+    weak var delegate: HomeHeaderReusibleViewDelegate? = nil
     
     let viewStackView: UIStackView = {
         let stack = UIStackView()
@@ -62,6 +67,8 @@ final class HomeHeaderReusibleView: UICollectionReusableView {
         let img = UIImage(named: "homeHederButton")
         button.setImage(img, for: .normal)
         
+        button.addTarget(nil, action: #selector(touchUpInside(button:)), for: .touchUpInside)
+        
         return button
     }()
     
@@ -99,6 +106,11 @@ final class HomeHeaderReusibleView: UICollectionReusableView {
         
         rightButton.topAnchor.constraint(equalTo: self.topAnchor, constant: 20).isActive = true
         rightButton.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
+    }
+    
+    //MARK: - Selectors
+    @objc func touchUpInside(button: UIButton) {
+        delegate?.homeHeaderReusibleView(didTappedRightButton: button)
     }
 }
 

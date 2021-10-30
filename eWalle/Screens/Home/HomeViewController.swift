@@ -176,6 +176,13 @@ extension HomeViewController {
 // MARK: CollectionView Delegate
 extension HomeViewController {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+    }
+    
+}
+
+extension HomeViewController: HomeHeaderReusibleViewDelegate {
+    func homeHeaderReusibleView(didTappedRightButton button: UIButton) {
         router?.navigateToMenu(from: AppScreen(titled: "Home", image: view.snapshot))
     }
     
@@ -218,6 +225,7 @@ extension HomeViewController {
             let view = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HomeHeaderReusibleView.reuseIdentifier, for: indexPath) as! HomeHeaderReusibleView
             view.firstSectionLabel.text = sectionsCash[indexPath.section].title
             view.rightButton.setImage(UIImage(named: sectionsCash[indexPath.section].rightButtonImagePath), for: .normal)
+            view.delegate = self
             return view
         } else {
             let view = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: SectionHeaderReusibleView.reuseIdentifier, for: indexPath) as! SectionHeaderReusibleView
