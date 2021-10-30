@@ -33,7 +33,7 @@ final class HomeViewController: UICollectionViewController{
     
     // MARK: - Balance section layout
     
-    static var balanceLayout: NSCollectionLayoutSection {
+    var balanceLayout: NSCollectionLayoutSection {
         
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
@@ -53,7 +53,7 @@ final class HomeViewController: UICollectionViewController{
     
     // MARK: - Friends section layout
     
-    static var friendsLayout: NSCollectionLayoutSection {
+    var friendsLayout: NSCollectionLayoutSection {
         
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
@@ -75,7 +75,7 @@ final class HomeViewController: UICollectionViewController{
     
     // MARK: - Services section layout
     
-    static var servicesLayout: NSCollectionLayoutSection {
+     var servicesLayout: NSCollectionLayoutSection {
         
         let itemSize = NSCollectionLayoutSize(widthDimension: .absolute(20), heightDimension: .absolute(80))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
@@ -95,20 +95,20 @@ final class HomeViewController: UICollectionViewController{
     
     
     // MARK: - Set layout for section
-    let layout: UICollectionViewCompositionalLayout = {
+    fileprivate func makeCollectionLayout() -> UICollectionViewCompositionalLayout {
         let layout = UICollectionViewCompositionalLayout { (sectionIndex, layoutEnvironment) -> NSCollectionLayoutSection? in
             
-            let sectionKind = Section.SectionKind(rawValue: sectionIndex)
+            //let sectionKind = Section.SectionKind(rawValue: sectionIndex)
+            let kind = self.sectionsCash[sectionIndex].kind
             
-            switch sectionKind{
-            case .balance: return balanceLayout
-            case .friends: return friendsLayout
-            case .services: return servicesLayout
-            case .none: return nil
+            switch kind {
+            case .balance: return self.balanceLayout
+            case .friends: return self.friendsLayout
+            case .services: return self.servicesLayout
             }
         }
         return layout
-    }()
+    }
     
     //MARK: - Inits
     // Comment if Storyboard
@@ -233,7 +233,7 @@ extension HomeViewController {
 extension HomeViewController {
     fileprivate func collectionViewSetup() {
         storyBoardCollectionView = collectionView
-        collectionView = UICollectionView(frame: storyBoardCollectionView!.frame, collectionViewLayout: layout)
+        collectionView = UICollectionView(frame: storyBoardCollectionView!.frame, collectionViewLayout: makeCollectionLayout())
         collectionView.register(SectionHeaderReusibleView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: SectionHeaderReusibleView.reuseIdentifier)
         collectionView.register(HomeHeaderReusibleView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HomeHeaderReusibleView.reuseIdentifier)
     }
