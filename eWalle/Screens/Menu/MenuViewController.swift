@@ -24,6 +24,7 @@ class MenuViewController: UIViewController {
     var menuTitlesCash = [String]()
     
     var screensCash = [String : UIImage]()
+    var selectedRow: Int = 0
     
     //MARK: - IBOutlets
     @IBOutlet weak var accountBackgroundRoundedView: UIView!
@@ -59,6 +60,10 @@ class MenuViewController: UIViewController {
     //MARK: - LifeCircle methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        self.modalPresentationStyle = .fullScreen
+        self.modalTransitionStyle = .crossDissolve
         
         // Do any additional setup after loading the view.
         prepareSubviews()
@@ -127,9 +132,17 @@ class MenuViewController: UIViewController {
     //MARK: - Actions
     
     @IBAction func menuCloseButtonAction(_ sender: UIButton) {
+        switch selectedRow {
+        case 0: router?.navigateToHome()
+        case 1: router?.navigateToLogin()
+        case 2: router?.navigateToLogin()
+        default: return
+        }
+        
     }
     
     @IBAction func logoutButtonAction(_ sender: UIButton) {
+        router?.navigateToLogin()
     }
     
     //MARK: - Constraints setup method
@@ -175,6 +188,7 @@ extension MenuViewController: UITableViewDelegate {
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedRow = indexPath.row
         switchSelectedVCImageView(for: indexPath)
     }
     
@@ -216,6 +230,7 @@ extension MenuViewController: MenuDisplayLogic {
         vc.router = router
         interactor.presenter = presenter
         presenter.viewController = vc
+        router.vc = vc
         router.dataStorage = interactor
         
     }

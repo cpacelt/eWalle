@@ -21,8 +21,10 @@ extension LoginRouter: LoginRoutingLogic {
     
     func navigateToHome() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let menu = storyboard.instantiateViewController(withIdentifier: "HomeViewController")
-        vc?.show(menu, sender: nil)
+        let home = storyboard.instantiateViewController(withIdentifier: "HomeViewController")
+        
+        vc?.modalPresentationStyle = .overFullScreen
+        vc?.present(home, animated: true, completion: nil)
         
     }
 

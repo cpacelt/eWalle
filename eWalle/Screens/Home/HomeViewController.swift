@@ -126,8 +126,9 @@ final class HomeViewController: UICollectionViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        cleanSwiftAssembly()
         collectionViewSetup()
+        
+        cleanSwiftAssembly()
         interactor?.getAccount()
         interactor?.getFriends()
         interactor?.getServices()

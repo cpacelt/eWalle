@@ -22,7 +22,7 @@ extension HomeRouter: HomeRoutingLogic {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let menu = storyboard.instantiateViewController(withIdentifier: "MenuViewController") as! MenuViewController
         
-        vc?.show(menu, sender: nil)
+        vc?.present(menu, animated: true, completion: nil)
 
         //Self snapshot
         menu.router?.dataStorage?.vcSnapshots?[screen.title ?? ""] = screen.snapshot
