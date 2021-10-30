@@ -8,13 +8,11 @@
 import UIKit
 
 protocol MenuDisplayLogic: AnyObject {
-    
     func updateScreensCash(with data: [String : UIImage])
     func displayMenu(with data: [String])
     func displayInitionState(with data: AppScreen?)
     func cleanSwiftAssembly()
 }
-
 
 class MenuViewController: UIViewController {
     //MARK: - Presenter reference
@@ -116,7 +114,13 @@ class MenuViewController: UIViewController {
     
     fileprivate func switchSelectedVCImageView(for indexPath: IndexPath) {
         DispatchQueue.main.async {
-            self.selectedVCImageView.image = self.screensCash[self.menuTitlesCash[indexPath.row]]
+            
+            UIView.transition(with: self.selectedVCImageView, duration: 0.4, options: .transitionCrossDissolve , animations: {
+                self.selectedVCImageView.image = self.screensCash[self.menuTitlesCash[indexPath.row]]
+                    }, completion: nil)
+            
+            
+            
         }
     }
     
@@ -145,8 +149,6 @@ class MenuViewController: UIViewController {
         accountStackView.rightAnchor.constraint(equalTo: accountBackgroundRoundedView.rightAnchor, constant: -20).isActive = true
         accountStackView.bottomAnchor.constraint(equalTo: accountBackgroundRoundedView.bottomAnchor, constant: -20).isActive = true
     }
-    
-    
     
 }
 
@@ -177,7 +179,6 @@ extension MenuViewController: UITableViewDelegate {
     }
     
 }
-
 
 
 // MARK: - Display Logic
@@ -217,9 +218,7 @@ extension MenuViewController: MenuDisplayLogic {
         presenter.viewController = vc
         router.dataStorage = interactor
         
-        
     }
-    
     
 }
 

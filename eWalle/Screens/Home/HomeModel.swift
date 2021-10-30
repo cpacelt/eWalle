@@ -32,6 +32,7 @@ struct Section {
     
     enum SectionKind: Int {
         // WARN: - You shouldn't change the direction
+        // let kind = SectionKind(rawValue: indexPath.section) usecase
         case balance
         case friends
         case services

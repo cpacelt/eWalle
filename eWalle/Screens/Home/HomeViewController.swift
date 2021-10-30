@@ -13,13 +13,12 @@ protocol HomeDisplayLogic: AnyObject {
     func displayFriends(with data: [Person])
     func displayServices(with data: [Service])
     func displaySections(with data: [Section])
-    
     func cleanSwiftAssembly()
 }
 
 final class HomeViewController: UICollectionViewController{
     
-    //MARK: - Presenter reference
+    // MARK: - Presenter reference
     var interactor: HomeBusinessLogic?
     var presenter: HomePresentationLogic?
     var router: HomeRoutingLogic?
@@ -31,7 +30,6 @@ final class HomeViewController: UICollectionViewController{
     var accountCash: [Account] = []
     var servicesCash: [Service] = []
     var sectionsCash: [Section] = []
-    
     
     // MARK: - Balance section layout
     
@@ -96,8 +94,6 @@ final class HomeViewController: UICollectionViewController{
     }
     
     
-    
-    
     // MARK: - Set layout for section
     let layout: UICollectionViewCompositionalLayout = {
         let layout = UICollectionViewCompositionalLayout { (sectionIndex, layoutEnvironment) -> NSCollectionLayoutSection? in
@@ -139,7 +135,6 @@ final class HomeViewController: UICollectionViewController{
     }
     
 }
-
 
 // MARK: CollectionView DataSource
 extension HomeViewController {
@@ -192,8 +187,6 @@ extension HomeViewController {
     
     fileprivate func friendCellSetup(for indexPath: IndexPath) -> UICollectionViewCell {
         
-        
-        
         if indexPath.row == 0 {
             let cell = storyBoardCollectionView!.dequeueReusableCell(withReuseIdentifier: AddFriendCell.reuseIdentifier, for: indexPath)
             return cell
@@ -205,7 +198,6 @@ extension HomeViewController {
         
     }
     
-    
     fileprivate func balanceCellSetup(for indexPath: IndexPath) -> BalanceCell {
         let cell = storyBoardCollectionView!.dequeueReusableCell(withReuseIdentifier: BalanceCell.reuseIdentifier, for: indexPath) as! BalanceCell
         
@@ -214,32 +206,24 @@ extension HomeViewController {
         return cell
     }
     
-    
     fileprivate func servicesCellSetup(for indexPath: IndexPath) -> ServiceCell {
         let cell = storyBoardCollectionView!.dequeueReusableCell(withReuseIdentifier: ServiceCell.reuseIdentifier, for: indexPath) as! ServiceCell
         cell.configure(with: servicesCash[indexPath.row])
         return cell
     }
     
-    
     fileprivate func makeSectionHeader(for indexPath: IndexPath) -> UICollectionReusableView {
         if indexPath.section == 0 {
             
             let view = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HomeHeaderReusibleView.reuseIdentifier, for: indexPath) as! HomeHeaderReusibleView
-            
             view.firstSectionLabel.text = sectionsCash[indexPath.section].title
             view.rightButton.setImage(UIImage(named: sectionsCash[indexPath.section].rightButtonImagePath), for: .normal)
-            
             return view
-            
         } else {
-            
             let view = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: SectionHeaderReusibleView.reuseIdentifier, for: indexPath) as! SectionHeaderReusibleView
-            
             view.label.text = sectionsCash[indexPath.section].title
             view.rightButton.setImage(UIImage(named: sectionsCash[indexPath.section].rightButtonImagePath), for: .normal)
             return view
-            
         }
     }
     
@@ -277,7 +261,6 @@ extension HomeViewController: HomeDisplayLogic {
         servicesCash = data
         collectionView.reloadData()
     }
-    
     
     // MARK: - Clean swift assembly
     func cleanSwiftAssembly() {

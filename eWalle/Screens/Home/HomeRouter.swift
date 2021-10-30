@@ -23,9 +23,14 @@ extension HomeRouter: HomeRoutingLogic {
         let menu = storyboard.instantiateViewController(withIdentifier: "MenuViewController") as! MenuViewController
         
         vc?.show(menu, sender: nil)
-        
-        menu.router?.dataStorage?.vcSnapshots?[screen.title ?? ""] = screen.snapshot        
+
+        //Self snapshot
+        menu.router?.dataStorage?.vcSnapshots?[screen.title ?? ""] = screen.snapshot
         menu.router?.dataStorage?.previous = screen
+
+        // Login snapshot
+        menu.router?.dataStorage?.vcSnapshots?["Login"] = UIImage(named: "loginScreen")
+        
         
     }
 
