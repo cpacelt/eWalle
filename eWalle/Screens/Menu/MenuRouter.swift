@@ -35,6 +35,5 @@ extension MenuRouter: MenuRoutingLogic {
         me.switchToVC(titled: "Home")
     }
     
-    
 }
 

@@ -80,8 +80,6 @@ final class MenuViewController: ContainerViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        
-        
         interactor?.fetchScreensCash()
         interactor?.fetchInitionState()
         
@@ -215,18 +213,12 @@ extension MenuViewController: MenuDisplayLogic {
         let index = controllers.firstIndex(of: previousVC)
         self.menuTableView.selectRow(at: IndexPath(row: index ?? 0, section: 0), animated: false, scrollPosition: .none)
         
+        //didSelectDelegate not performing when caled tableView.selectRow...
+        self.selectAt(index!)
         self.selectedVCImageView.image = screensCash[previousVC.title!]
         
     }
 
-//    DEPRECATED
-//    func displayMenu(with data: [String]) {
-//        self.menuTitlesCash = data
-//        menuTableView.reloadData()
-//
-//    }
-    
-    
     // MARK: - Clean swift assembly
     func cleanSwiftAssembly() {
         let vc = self

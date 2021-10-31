@@ -30,6 +30,7 @@ extension HomeRouter: HomeRoutingLogic {
         // Parent is MenuVC
         guard let menu = vc?.presentingViewController as? MenuViewController else { return }
         menu.router?.dataStorage?.previous = vc
+        
         vc?.dismiss(animated: true, completion: nil)
 
     }

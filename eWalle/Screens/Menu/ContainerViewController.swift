@@ -16,10 +16,10 @@ protocol ViewControllersCustomContainer: AnyObject {
     func selectAt (_ index: Int)
     func deselect (_ vc: UIViewController)
     func deselectAt (_ index: Int)
-    func switchTo(_ vc: UIViewController)
-    func switchTo(_ index: Int)
+    func switchTo(_ vc: UIViewController, from: UIViewController?, animating: Bool)
+    func switchTo(_ index: Int, from: UIViewController?, animating: Bool)
     func switchToSelected()
-    func switchToVC(titled titleName: String)
+    func switchToVC(titled titleName: String, from: UIViewController?, animating: Bool)
     func switchToMain()
 }
 
@@ -45,31 +45,35 @@ class ContainerViewController: UIViewController  {
 
 // MARK: - ViewControllersCustomContainer
 extension ContainerViewController: ViewControllersCustomContainer {
-
+    
     func switchToMain() {
         self.show(self, sender: nil)
     }
     
-    func switchToVC(titled titleName: String) {
+    func switchToVC(titled titleName: String, from: UIViewController? = nil, animating: Bool = false) {
         let vc = self.controllers.first{ $0.title == titleName }
         guard let vc = vc else { return }
-        self.switchTo(vc)
+        self.switchTo(vc, from: from, animating: animating)
     }
     
     func switchToSelected() {
         self.switchTo(selectedIndex)
     }
     
-
-    func switchTo(_ vc: UIViewController) {
+    
+    func switchTo(_ vc: UIViewController, from: UIViewController? = nil, animating: Bool = false) {
         guard let index = self.controllers.firstIndex(of: vc) else { return }
-        switchTo(index)
+        switchTo(index, from: from, animating: animating)
         
     }
     
-    func switchTo(_ index: Int) {
+    func switchTo(_ index: Int, from: UIViewController? = nil, animating: Bool = false) {
         if index >= controllers.count { return }
-        self.show(controllers[index], sender: nil)
+        if from == nil { return self.show(self.controllers[index], sender: nil) }
+        
+        from?.dismiss(animated: animating) {
+            self.show(self.controllers[index], sender: nil)
+        }
     }
     
     func add(_ vc: UIViewController) {

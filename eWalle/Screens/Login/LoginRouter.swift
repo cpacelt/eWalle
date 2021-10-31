@@ -14,7 +14,6 @@ protocol LoginRoutingLogic: AnyObject {
 }
 
 
-
 class LoginRouter {
     weak var vc: UIViewController?
 }
@@ -37,7 +36,8 @@ extension LoginRouter: LoginRoutingLogic {
         menu.router?.dataStorage?.previous = self.vc
         // menu.router?.dataStorage?.vcSnapshots?[self.vc?.title ?? ""] = self.vc?.view.snapshot
         
-        vc?.dismiss(animated: true, completion: nil)
+        //vc?.dismiss(animated: true, completion: nil)
+        menu.switchToVC(titled: "Home", from: self.vc)
         
     }
     
