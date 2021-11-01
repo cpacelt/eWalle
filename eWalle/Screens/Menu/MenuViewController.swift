@@ -60,12 +60,15 @@ final class MenuViewController: ContainerViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+
+        let login1 = UIViewController()
+        login1.title = "Login1"
+        login1.view.backgroundColor = .systemBackground
+        let login2 = UIViewController()
+        login2.title = "Login1"
+        login2.view.backgroundColor = .systemBackground
         
-        //Child view controllers creation
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let home = storyboard.instantiateViewController(withIdentifier: "HomeViewController")
-        let login = storyboard.instantiateViewController(withIdentifier: "LoginViewController")
-        let stack = [login, home]
+        let stack = [login1, login2]
         self.add(stack)
         
         // Do any additional setup after loading the view.
@@ -87,11 +90,7 @@ final class MenuViewController: ContainerViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        if !isLogin {
-            router?.navigateToLogin()
-            isLogin = !isLogin
-        }
+
     }
     
     
@@ -141,11 +140,12 @@ final class MenuViewController: ContainerViewController {
     //MARK: - Actions
     
     @IBAction func menuCloseButtonAction(_ sender: UIButton) {
+        //self.dismiss(animated: true, completion: nil)
         self.switchToSelected()
     }
     
     @IBAction func logoutButtonAction(_ sender: UIButton) {
-        router?.navigateToLogin()
+        //router?.navigateToLogin()
     }
     
     //MARK: - Constraints setup method
@@ -160,7 +160,7 @@ final class MenuViewController: ContainerViewController {
         accountBackgroundRoundedView.rightAnchor.constraint(equalTo: view.centerXAnchor, constant: 30).isActive = true
         accountBackgroundRoundedView.bottomAnchor.constraint(equalTo: view.topAnchor, constant: accountBackgroundRoundedView.layer.cornerRadius * 1.0 * 2.5).isActive = true
         
-        accountStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30).isActive = true
+        accountStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         accountStackView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 40).isActive = true
         accountStackView.rightAnchor.constraint(equalTo: accountBackgroundRoundedView.rightAnchor, constant: -20).isActive = true
         accountStackView.bottomAnchor.constraint(equalTo: accountBackgroundRoundedView.bottomAnchor, constant: -20).isActive = true

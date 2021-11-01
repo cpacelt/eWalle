@@ -69,6 +69,10 @@ extension ContainerViewController: ViewControllersCustomContainer {
     
     func switchTo(_ index: Int, from: UIViewController? = nil, animating: Bool = false) {
         if index >= controllers.count { return }
+        if self.controllers[index] === self.presentingViewController {
+            self.dismiss(animated: true, completion: nil)
+            return
+        }
         if from == nil { return self.show(self.controllers[index], sender: nil) }
         
         from?.dismiss(animated: animating) {
@@ -77,12 +81,12 @@ extension ContainerViewController: ViewControllersCustomContainer {
     }
     
     func add(_ vc: UIViewController) {
-        self.addChild(vc)
+        //self.addChild(vc)
         self.controllers.append(vc)
     }
     
     func add(_ vcs: [UIViewController]) {
-        controllers.forEach { self.addChild($0)}
+        //controllers.forEach { self.addChild($0)}
         self.controllers.append(contentsOf: vcs)
     }
     

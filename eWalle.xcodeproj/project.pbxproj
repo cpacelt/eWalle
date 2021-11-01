@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		923996EA8F5F03CC8CCCB8AC /* Pods_eWalle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6019ACB372173AB6585854DA /* Pods_eWalle.framework */; };
 		D62EE17D2729EC8100D15748 /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62EE17C2729EC8100D15748 /* MenuCell.swift */; };
 		D63C0AAE2729AC3600834842 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D63C0AAD2729AC3600834842 /* AppDelegate.swift */; };
 		D63C0AB02729AC3600834842 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D63C0AAF2729AC3600834842 /* SceneDelegate.swift */; };
@@ -37,6 +38,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5FA08408578D8954385C8672 /* Pods-eWalle.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eWalle.release.xcconfig"; path = "Target Support Files/Pods-eWalle/Pods-eWalle.release.xcconfig"; sourceTree = "<group>"; };
+		6019ACB372173AB6585854DA /* Pods_eWalle.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_eWalle.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D62EE17C2729EC8100D15748 /* MenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
 		D63C0AAA2729AC3600834842 /* eWalle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = eWalle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D63C0AAD2729AC3600834842 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -66,6 +69,7 @@
 		D6FC2C85272A84F600893A8B /* FriendCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendCell.swift; sourceTree = "<group>"; };
 		D6FC2C87272A853400893A8B /* BalanceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceCell.swift; sourceTree = "<group>"; };
 		D6FC2C89272A855A00893A8B /* ServiceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceCell.swift; sourceTree = "<group>"; };
+		FC8E8E57F5FDB88C9DDEA704 /* Pods-eWalle.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eWalle.debug.xcconfig"; path = "Target Support Files/Pods-eWalle/Pods-eWalle.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,17 +77,38 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				923996EA8F5F03CC8CCCB8AC /* Pods_eWalle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2AE645D83A7F9C9E2D2A669F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				FC8E8E57F5FDB88C9DDEA704 /* Pods-eWalle.debug.xcconfig */,
+				5FA08408578D8954385C8672 /* Pods-eWalle.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		713B0478976B019527D5921B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6019ACB372173AB6585854DA /* Pods_eWalle.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		D63C0AA12729AC3600834842 = {
 			isa = PBXGroup;
 			children = (
 				D63C0AAC2729AC3600834842 /* eWalle */,
 				D63C0AAB2729AC3600834842 /* Products */,
+				2AE645D83A7F9C9E2D2A669F /* Pods */,
+				713B0478976B019527D5921B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -193,9 +218,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D63C0ABE2729AC3A00834842 /* Build configuration list for PBXNativeTarget "eWalle" */;
 			buildPhases = (
+				A491281D04BCF73751301668 /* [CP] Check Pods Manifest.lock */,
 				D63C0AA62729AC3600834842 /* Sources */,
 				D63C0AA72729AC3600834842 /* Frameworks */,
 				D63C0AA82729AC3600834842 /* Resources */,
+				62933D510CBAFC9F247DF873 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -253,6 +280,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		62933D510CBAFC9F247DF873 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-eWalle/Pods-eWalle-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-eWalle/Pods-eWalle-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-eWalle/Pods-eWalle-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A491281D04BCF73751301668 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-eWalle-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D63C0AA62729AC3600834842 /* Sources */ = {
@@ -424,6 +493,7 @@
 		};
 		D63C0ABF2729AC3A00834842 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FC8E8E57F5FDB88C9DDEA704 /* Pods-eWalle.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -452,6 +522,7 @@
 		};
 		D63C0AC02729AC3A00834842 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5FA08408578D8954385C8672 /* Pods-eWalle.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

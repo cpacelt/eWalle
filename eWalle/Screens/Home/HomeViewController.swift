@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 protocol HomeDisplayLogic: AnyObject {
     func displayAccount(with data: [Account])
     func displayFriends(with data: [Person])
@@ -135,10 +134,15 @@ final class HomeViewController: UICollectionViewController {
         interactor?.getFriends()
         interactor?.getServices()
         interactor?.getSections()
+        
+        
+        router?.createMenu()
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
         
         router?.passSnapshot()
     }
